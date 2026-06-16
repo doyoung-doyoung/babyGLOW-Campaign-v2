@@ -493,60 +493,49 @@ function seed(){
 let DB=null;
 
 /* ============================================================
-   PERSISTENCE — works on Claude artifacts AND on Vercel/static.
-   Auto-detected backend:
-     • Claude artifact  -> window.storage (shared)
-     • Vercel default   -> localStorage   (free, but THIS DEVICE only)
-     • Vercel + sharing -> free cloud sync via JSONBin (all devices)
-   To turn on shared cloud sync after deploying to Vercel:
-     1) Go to https://jsonbin.io  ->  create a free account
-     2) Create a new bin with content:  {"data":null,"videos":{}}
-     3) Copy the Bin ID and your X-Master-Key
-     4) Fill CLOUD below and set enabled:true, then redeploy.
-   (Note: the key sits in client code, so use a private bin for a
-    small internal team. Uploadvideo FILES may exceed the free
-    cloud size limit — prefer pasting Google Drive / YouTube links.)
+   PERSISTENCE — Supabase cloud sync (all devices, free tier)
+   Backend: Supabase project hdujouoaeqatrazrnlhn
+   Table: campaign_store (id int PK, data jsonb, videos jsonb)
    ============================================================ */
-const CLOUD={ enabled:true, binId:'6a295019da38895dfea6316e', key:'$2a$10$Y6cFD2IJNLFWhCoCGvNqRegHnjLx/y0UHxtgftyahJvu/CNoO9K82' };
+const SUPA={
+  url:'https://hdujouoaeqatrazrnlhn.supabase.co',
+  key:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhkdWpvdW9hZXFhdHJhenJubGhuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUwMjY4NzQsImV4cCI6MjA5MDYwMjg3NH0.OGNcaxicnSw2ZmbUzrvt3JLRhI6ClXD8YTKy_xoxTaU'
+};
 
 const Store={
-  mode:(typeof window!=='undefined'&&window.storage&&typeof window.storage.get==='function')?'claude'
-       :(CLOUD.enabled&&CLOUD.binId&&CLOUD.key)?'cloud':'local',
+  mode:(typeof window!=='undefined'&&window.storage&&typeof window.storage.get==='function')?'claude':'cloud',
   _cache:null,
+  _headers(){return{apikey:SUPA.key,Authorization:'Bearer '+SUPA.key,'Content-Type':'application/json'};},
   async _get(){
-    const r=await fetch('https://api.jsonbin.io/v3/b/'+CLOUD.binId+'/latest',{headers:{'X-Master-Key':CLOUD.key}});
-    if(!r.ok)throw new Error('cloud get '+r.status);
-    const j=await r.json();return j.record||{data:null,videos:{}};
+    const r=await fetch(SUPA.url+'/rest/v1/campaign_store?id=eq.1&select=data,videos',{headers:this._headers()});
+    if(!r.ok)throw new Error('supa get '+r.status);
+    const j=await r.json();
+    return j[0]||{data:null,videos:{}};
   },
   async _put(o){
-    const r=await fetch('https://api.jsonbin.io/v3/b/'+CLOUD.binId,{method:'PUT',
-      headers:{'Content-Type':'application/json','X-Master-Key':CLOUD.key},body:JSON.stringify(o)});
-    if(!r.ok)throw new Error('cloud put '+r.status);
+    const r=await fetch(SUPA.url+'/rest/v1/campaign_store?id=eq.1',{method:'PATCH',
+      headers:{...this._headers(),Prefer:'return=minimal'},body:JSON.stringify({data:o.data,videos:o.videos})});
+    if(!r.ok)throw new Error('supa put '+r.status);
   },
   async getMain(){
     if(this.mode==='claude'){try{const r=await window.storage.get(STORE_KEY,true);return r&&r.value?JSON.parse(r.value):null;}catch(e){return null;}}
-    if(this.mode==='cloud'){const c=await this._get();this._cache=c;return c.data||null;}
-    try{const v=localStorage.getItem(STORE_KEY);return v?JSON.parse(v):null;}catch(e){return null;}
+    const c=await this._get();this._cache=c;return c.data||null;
   },
   async setMain(data){
     if(this.mode==='claude'){try{await window.storage.set(STORE_KEY,JSON.stringify(data),true);}catch(e){}return;}
-    if(this.mode==='cloud'){const c=this._cache||await this._get();c.data=data;this._cache=c;await this._put(c);return;}
-    try{localStorage.setItem(STORE_KEY,JSON.stringify(data));}catch(e){}
+    const c=this._cache||await this._get();c.data=data;this._cache=c;await this._put(c);
   },
   async getVideo(bid){
     if(this.mode==='claude'){try{const r=await window.storage.get('babyglow:video:'+bid,true);return r&&r.value?r.value:null;}catch(e){return null;}}
-    if(this.mode==='cloud'){const c=this._cache||await this._get();this._cache=c;return (c.videos&&c.videos[bid])||null;}
-    try{return localStorage.getItem('babyglow:video:'+bid);}catch(e){return null;}
+    const c=this._cache||await this._get();this._cache=c;return(c.videos&&c.videos[bid])||null;
   },
   async setVideo(bid,dataUrl){
     if(this.mode==='claude'){await window.storage.set('babyglow:video:'+bid,dataUrl,true);return;}
-    if(this.mode==='cloud'){const c=this._cache||await this._get();c.videos=c.videos||{};c.videos[bid]=dataUrl;this._cache=c;await this._put(c);return;}
-    localStorage.setItem('babyglow:video:'+bid,dataUrl);
+    const c=this._cache||await this._get();c.videos=c.videos||{};c.videos[bid]=dataUrl;this._cache=c;await this._put(c);
   },
   async delVideo(bid){
     if(this.mode==='claude'){try{await window.storage.delete('babyglow:video:'+bid,true);}catch(e){}return;}
-    if(this.mode==='cloud'){const c=this._cache||await this._get();if(c.videos)delete c.videos[bid];this._cache=c;await this._put(c);return;}
-    try{localStorage.removeItem('babyglow:video:'+bid);}catch(e){}
+    const c=this._cache||await this._get();if(c.videos)delete c.videos[bid];this._cache=c;await this._put(c);
   }
 };
 

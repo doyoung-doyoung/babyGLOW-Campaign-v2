@@ -310,6 +310,21 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--coral);outline-o
   .gate-logo{width:70%}
   .gate-logo-text .baby{font-size:38px}.gate-logo-text .glow{font-size:48px}
 }
+/* ---------- engagement ---------- */
+.eng-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:8px}
+.eng-cap-h{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.eng-status{font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;white-space:nowrap}
+.eng-status.ok{background:rgba(63,169,138,.14);color:var(--green)}
+.eng-status.pend{background:rgba(210,96,136,.12);color:var(--coral-deep,#D26088)}
+.eng-link{font-size:13px;line-height:1.55;margin-bottom:8px;word-break:break-all}
+.dn-badge{display:inline-block;font-size:11px;font-weight:700;padding:1px 7px;border-radius:999px;background:rgba(94,131,232,.14);color:var(--blue);margin-left:4px}
+.eng-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}
+.eng-cell{background:var(--surface,#f6f7fb);border-radius:10px;padding:8px 6px;text-align:center}
+.eng-n{font-size:16px;font-weight:800;color:var(--ink);line-height:1.1}
+.eng-l{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;margin-top:3px}
+.cap-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+.cap-row img{width:74px;height:74px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,.08)}
+@media(max-width:560px){.eng-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
@@ -439,6 +454,19 @@ const I18N={
     timelineDates:'Timeline dates',expected:'Expected',done:'Completed',exp:'expected',
     visitRow:'Clinic visit',firstCutRow:'First Edit',uploadRow:'Upload',
     setAllPlanUpload:'Set expected upload date — all',
+    engagement:'Engagement',engTitle:'Engagement & insights',
+    enterEngagement:'Enter engagement',editEngagement:'Edit engagement',
+    platform:'Platform',contentType:'Content type',
+    views:'Views',reach:'Reach',likes:'Likes',comments:'Comments',saves:'Saves',shares:'Shares',follows:'New follows',
+    er:'Engagement rate',captures:'Insight screenshots',
+    addCapture:'Add screenshot link',drivePlaceholder:'Paste Google Drive share link…',
+    uploadedLink:'Uploaded link',uploadedOn:'Uploaded',notUploaded:'Not uploaded yet',
+    dPlus:'D+',dMinus:'D-',onTime:'On time',vsPlan:'vs planned',
+    reviewStatus:'Review',pending:'Pending review',confirmedEng:'Confirmed',
+    confirmEng:'Confirm',reopenEng:'Reopen',reviewNote:'Reviewer note',
+    noEngagement:'No engagement data yet',totalEngagement:'Total engagement',avgER:'Avg ER',
+    totalViews:'Total views',totalReach:'Total reach',uploadsDone:'Uploads done',engConfirmedCount:'Confirmed',
+    openCapture:'Open original',saveEngagement:'Save engagement',
     mode_claude:'Claude storage',mode_cloud:'Cloud sync',mode_local:'This device',
     localNote:'Saved in this browser only. Reviewers on other devices won\u2019t see your updates until you enable free cloud sync (see the note at the top of the HTML file).'
   },
@@ -476,6 +504,19 @@ const I18N={
     timelineDates:'타임라인 날짜',expected:'예상일',done:'완료일',exp:'예상',
     visitRow:'방문',firstCutRow:'1차 영상',uploadRow:'업로드',
     setAllPlanUpload:'전체 업로드 예상일 설정',
+    engagement:'인게이지먼트',engTitle:'인게이지먼트 & 인사이트',
+    enterEngagement:'인게이지먼트 입력',editEngagement:'인게이지먼트 수정',
+    platform:'플랫폼',contentType:'콘텐츠 유형',
+    views:'조회수',reach:'도달',likes:'좋아요',comments:'댓글',saves:'저장',shares:'공유',follows:'신규 팔로우',
+    er:'인게이지먼트율',captures:'인사이트 캡처',
+    addCapture:'캡처 링크 추가',drivePlaceholder:'구글 드라이브 공유 링크 붙여넣기…',
+    uploadedLink:'업로드 링크',uploadedOn:'업로드일',notUploaded:'아직 업로드 안 됨',
+    dPlus:'D+',dMinus:'D-',onTime:'정시',vsPlan:'예정 대비',
+    reviewStatus:'리뷰',pending:'확인 대기',confirmedEng:'확인 완료',
+    confirmEng:'확인 완료',reopenEng:'재오픈',reviewNote:'리뷰어 메모',
+    noEngagement:'인게이지먼트 데이터 없음',totalEngagement:'총 인게이지먼트',avgER:'평균 ER',
+    totalViews:'총 조회수',totalReach:'총 도달',uploadsDone:'업로드 완료',engConfirmedCount:'확인 완료',
+    openCapture:'원본 열기',saveEngagement:'인게이지먼트 저장',
     mode_claude:'Claude 저장소',mode_cloud:'클라우드 동기화',mode_local:'이 기기',
     localNote:'이 브라우저에만 저장됩니다. 다른 기기의 리뷰어가 업데이트를 보려면 무료 클라우드 동기화를 켜야 합니다(HTML 파일 상단 주석 참고).'
   }
@@ -543,7 +584,7 @@ async function loadData(){try{return await Store.getMain();}catch(e){return null
 async function saveData(){try{await Store.setMain(DB);}catch(e){console.warn('save failed',e);}}
 async function saveNow(){await saveData();toast(t('saved'));}
 async function reloadData(){
-  try{const fresh=await Store.getMain();if(fresh){DB=fresh;videoCache={};}}catch(e){}
+  try{const fresh=await Store.getMain();if(fresh){DB=fresh;videoCache={};migrate();}}catch(e){}
   render();toast(t('saved'));
 }
 
@@ -560,7 +601,7 @@ function startAutoSync(){
     if(ae&&(ae.tagName==='INPUT'||ae.tagName==='TEXTAREA'||ae.tagName==='SELECT'))return;
     try{
       const fresh=await Store.getMain();
-      if(fresh&&JSON.stringify(fresh)!==JSON.stringify(DB)){DB=fresh;videoCache={};render();}
+      if(fresh&&JSON.stringify(fresh)!==JSON.stringify(DB)){DB=fresh;videoCache={};migrate();render();}
     }catch(e){}
   },20000);
 }
@@ -586,7 +627,8 @@ async function enter(role){
   else{state.tab='influencers';}
   document.getElementById('gate').classList.add('hidden');
   document.getElementById('app').classList.remove('hidden');
-  if(!DB){const d=await loadData();DB=d||seed();await saveData();}
+  if(!DB){const d=await loadData();DB=d||seed();migrate();await saveData();}
+  else migrate();
   setupChrome();render();startAutoSync();
 }
 function signOut(){
@@ -646,6 +688,38 @@ function uid(p){return p+Math.random().toString(36).slice(2,8);}
 function gv(id){const el=document.getElementById(id);return el?el.value:'';}
 /* local (not UTC) YYYY-MM-DD so date-stamping never jumps a day in +07:00 */
 function todayLocal(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+
+/* ---------- engagement model + helpers ---------- */
+function EMPTY_ENG(){return {platform:'',contentType:'',views:0,reach:0,likes:0,comments:0,saves:0,shares:0,follows:0,captures:[],er:0,review:{status:'pending',by:'',at:'',note:''}};}
+/* ensure every booking carries a full engagement object (runs on every DB load) */
+function migrate(){
+  if(!DB||!Array.isArray(DB.bookings))return;
+  DB.bookings.forEach(b=>{
+    const d=EMPTY_ENG();
+    if(!b.engagement||typeof b.engagement!=='object'){b.engagement=d;return;}
+    const e=b.engagement;
+    for(const k in d){if(e[k]===undefined)e[k]=d[k];}
+    if(!e.review||typeof e.review!=='object')e.review={status:'pending',by:'',at:'',note:''};
+    if(!Array.isArray(e.captures))e.captures=[];
+  });
+}
+function num(v){const n=Number(v);return isNaN(n)?0:n;}
+function fmtN(n){return (Number(n)||0).toLocaleString('en-US');}
+function engTotal(e){return num(e.likes)+num(e.comments)+num(e.saves)+num(e.shares);}
+function calcER(e){const r=num(e.reach);if(!r)return 0;return Math.round(engTotal(e)/r*1000)/10;}
+function engHasData(e){return e&&(num(e.views)||num(e.reach)||num(e.likes)||num(e.comments)||num(e.saves)||num(e.shares)||num(e.follows)||(e.captures&&e.captures.length));}
+/* extract a Google Drive FILEID from a share link, then build an embeddable thumbnail URL */
+function driveId(link){if(!link)return '';const m=link.match(/\/d\/([A-Za-z0-9_-]{12,})/)||link.match(/[?&]id=([A-Za-z0-9_-]{12,})/);return m?m[1]:'';}
+function driveThumb(link){const id=driveId(link);return id?('https://drive.google.com/thumbnail?id='+id+'&sz=w1000'):link;}
+/* D+N display: actual upload date relative to planned upload date */
+function daysAfter(planned,actual){
+  if(!planned||!actual)return '';
+  const p=new Date(planned+'T00:00:00'),a=new Date(actual+'T00:00:00');
+  if(isNaN(p)||isNaN(a))return '';
+  const n=Math.round((a-p)/86400000);
+  if(n===0)return t('onTime');
+  return n>0?(t('dPlus')+n):(t('dMinus')+Math.abs(n));
+}
 function avatar(x,size){
   const s=size||46;
   if(x.photoUrl){
@@ -912,6 +986,7 @@ function trackCard(b){
     <div class="divider"></div>
     <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:8px">${t('revisions')} (${(b.revisions||[]).length})</div>
     <div class="rev-thread">${revs||`<div style="font-size:13px;color:var(--muted)">${t('noRevYet')}</div>`}</div>
+    ${engagementBlock(b,true)}
   </div>`;
 }
 
@@ -934,7 +1009,18 @@ function computeStats(){
   const Upload=bks.filter(b=>b.stage==='Upload').length;
   let openRev=0,totalRev=0;
   bks.forEach(b=>(b.revisions||[]).forEach(r=>{totalRev++;if(!r.resolved)openRev++;}));
-  return {secured,confirmed,scheduled,visited,video,Upload,openRev,totalRev};
+  // engagement aggregates
+  let totalViews=0,totalReach=0,totalEng=0,totalFollows=0,erSum=0,erCount=0,engConfirmed=0,withData=0;
+  bks.forEach(b=>{const e=b.engagement;if(!e)return;
+    if(engHasData(e)){withData++;
+      totalViews+=num(e.views);totalReach+=num(e.reach);totalEng+=engTotal(e);totalFollows+=num(e.follows);
+      const er=calcER(e);if(er){erSum+=er;erCount++;}
+      if(e.review&&e.review.status==='confirmed')engConfirmed++;
+    }
+  });
+  const avgER=erCount?Math.round(erSum/erCount*10)/10:0;
+  return {secured,confirmed,scheduled,visited,video,Upload,openRev,totalRev,
+    totalViews,totalReach,totalEng,totalFollows,avgER,engConfirmed,withData};
 }
 function viewerStats(){
   const s=computeStats();
@@ -967,6 +1053,16 @@ function viewerStats(){
     ${funnel.map(([l,n])=>{const pct=Math.round(n/base*100);return `
       <div class="funnel-row"><div class="funnel-lab">${l}</div>
         <div class="funnel-track"><div class="funnel-fill" style="width:${Math.max(pct,4)}%">${n}</div></div></div>`;}).join('')}
+  </div>
+  <div class="panel"><h3 class="panel-h">${t('engTitle')}</h3>
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-n" style="color:var(--blue)">${fmtN(s.totalViews)}</div><div class="stat-l">${t('totalViews')}</div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--ink)">${fmtN(s.totalReach)}</div><div class="stat-l">${t('totalReach')}</div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--coral-deep)">${fmtN(s.totalEng)}</div><div class="stat-l">${t('totalEngagement')}</div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--green)">${s.avgER}%</div><div class="stat-l">${t('avgER')}</div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--ink)">${s.withData}</div><div class="stat-l">${t('uploadsDone')}</div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--green)">${s.engConfirmed}</div><div class="stat-l">${t('engConfirmedCount')}</div></div>
+    </div>
   </div>
   ${clinics.length?`<div class="panel"><h3 class="panel-h">By clinic</h3>
     <table class="stat-table"><thead><tr><th>Clinic</th><th>Selected</th><th>Visited</th><th>Upload</th></tr></thead>
@@ -1144,6 +1240,7 @@ function viewerScheduleCard(b){
         <input id="rev_${b.id}" placeholder="Describe the change you need…">
         <button class="mini solid" onclick="addRevision('${b.id}','viewer',document.getElementById('rev_${b.id}').value)">Send request</button>
       </div>`}`:''}
+    ${engagementBlock(b,false)}
   </div>`;
 }
 
@@ -1319,9 +1416,126 @@ async function saveBooking(id){
   const time=document.getElementById('b_time').value.trim();
   if(!infId){toast(t('selectInfluencer'));return;}
   if(id){const b=DB.bookings.find(x=>x.id===id);Object.assign(b,{infId,clinicId,date,time});}
-  else{DB.bookings.push({id:uid('b'),infId,clinicId,date,time,stage:'confirmed',footageUrl:'',finalUrl:'',uploadDate:'',plan:{},stageDates:{},revisions:[]});}
+  else{DB.bookings.push({id:uid('b'),infId,clinicId,date,time,stage:'confirmed',footageUrl:'',finalUrl:'',uploadDate:'',plan:{},stageDates:{},revisions:[],engagement:EMPTY_ENG()});}
   const x=inf(infId);if(x)x.status='confirmed';
   await saveData();closeModal();state.tab='reviews';setupChrome();render();toast(t('saved'));
+}
+
+/* ---------- engagement entry ---------- */
+function openEngagementModal(id){
+  const b=DB.bookings.find(x=>x.id===id);if(!b)return;
+  if(!b.engagement)b.engagement=EMPTY_ENG();
+  const e=b.engagement, x=inf(b.infId)||{h:'?'};
+  const platOpts=['','instagram','tiktok'].map(p=>`<option value="${p}" ${e.platform===p?'selected':''}>${p===''?'—':(p==='instagram'?'Instagram':'TikTok')}</option>`).join('');
+  const ctOpts=['','reel','photo','story','tiktok'].map(c=>`<option value="${c}" ${e.contentType===c?'selected':''}>${c===''?'—':c}</option>`).join('');
+  const numF=(fid,lab,val)=>`<div class="field"><label>${lab}</label><input id="${fid}" type="number" min="0" value="${num(val)}"></div>`;
+  const caps=(e.captures||[]).map((c,i)=>`
+    <div class="field-row" style="margin-bottom:6px;align-items:center">
+      ${driveId(c.link)?`<img src="${esc(driveThumb(c.link))}" referrerpolicy="no-referrer" loading="lazy" style="width:40px;height:40px;object-fit:cover;border-radius:6px">`:''}
+      <input value="${esc(c.link||'')}" readonly style="font-size:12px">
+      <button class="mini" onclick="removeCapture('${id}',${i})">✕</button>
+    </div>`).join('');
+  const body=`<div class="form-grid">
+    <div class="field full"><label>${t('uploadedLink')}</label><input id="eng_final" value="${esc(b.finalUrl||'')}" placeholder="https://…"></div>
+    ${fld('eng_udate',t('uploadedOn'),b.uploadDate||(b.stageDates&&b.stageDates.Upload)||'','','date')}
+    <div class="field"><label>${t('platform')}</label><select id="eng_plat">${platOpts}</select></div>
+    <div class="field"><label>${t('contentType')}</label><select id="eng_ct">${ctOpts}</select></div>
+    ${numF('eng_views',t('views'),e.views)}
+    ${numF('eng_reach',t('reach'),e.reach)}
+    ${numF('eng_likes',t('likes'),e.likes)}
+    ${numF('eng_comments',t('comments'),e.comments)}
+    ${numF('eng_saves',t('saves'),e.saves)}
+    ${numF('eng_shares',t('shares'),e.shares)}
+    ${numF('eng_follows',t('follows'),e.follows)}
+    <div class="field full"><label>${t('captures')}</label>
+      <div id="eng_caplist">${caps||`<div style="font-size:12px;color:var(--muted)">—</div>`}</div>
+      <div class="field-row" style="margin-top:6px">
+        <input id="eng_newcap" placeholder="${t('drivePlaceholder')}">
+        <button class="mini solid" onclick="addCapture('${id}')">${t('addCapture')}</button>
+      </div>
+    </div>
+  </div>`;
+  modalShell(t('engTitle')+' · '+esc(x.h),body,
+    `<button class="btn-ghost" onclick="closeModal()">${t('cancel')}</button>
+     <button class="btn-primary" onclick="saveEngagement('${id}')">${t('saveEngagement')}</button>`);
+}
+/* snapshot the open form into the engagement object WITHOUT saving/closing */
+function collectEng(id){
+  const b=DB.bookings.find(x=>x.id===id);if(!b)return null;
+  if(!b.engagement)b.engagement=EMPTY_ENG();
+  const e=b.engagement, g=k=>{const el=document.getElementById(k);return el?el.value:undefined;};
+  const fin=g('eng_final');if(fin!==undefined)b.finalUrl=fin.trim();
+  const ud=g('eng_udate');
+  if(ud!==undefined){
+    b.uploadDate=ud;
+    if(ud){if(!b.stageDates)b.stageDates={};if(!b.stageDates.Upload)b.stageDates.Upload=ud;
+      if(STAGES.indexOf(b.stage)<STAGES.indexOf('Upload'))b.stage='Upload';
+      const xx=inf(b.infId);if(xx)xx.status='confirmed';}
+  }
+  const plat=g('eng_plat');if(plat!==undefined)e.platform=plat;
+  const ct=g('eng_ct');if(ct!==undefined)e.contentType=ct;
+  ['views','reach','likes','comments','saves','shares','follows'].forEach(k=>{const v=g('eng_'+k);if(v!==undefined)e[k]=num(v);});
+  e.er=calcER(e);
+  return b;
+}
+async function addCapture(id){
+  const el=document.getElementById('eng_newcap');const link=(el&&el.value||'').trim();
+  collectEng(id);
+  if(link){const b=DB.bookings.find(x=>x.id===id);b.engagement.captures.push({link,id:driveId(link)});}
+  await saveData();openEngagementModal(id);
+}
+async function removeCapture(id,i){
+  collectEng(id);
+  const b=DB.bookings.find(x=>x.id===id);if(b&&b.engagement.captures)b.engagement.captures.splice(i,1);
+  await saveData();openEngagementModal(id);
+}
+async function saveEngagement(id){
+  collectEng(id);
+  await saveData();closeModal();render();toast(t('saved'));
+}
+async function confirmEngagement(id){
+  const b=DB.bookings.find(x=>x.id===id);if(!b)return;
+  const note=b.engagement.review&&b.engagement.review.note||'';
+  b.engagement.review={status:'confirmed',by:state.role==='admin'?'admin':'reviewer',at:todayLocal(),note};
+  await saveData();render(true);toast(t('saved'));
+}
+async function reopenEngagement(id){
+  const b=DB.bookings.find(x=>x.id===id);if(!b)return;
+  const note=b.engagement.review&&b.engagement.review.note||'';
+  b.engagement.review={status:'pending',by:'',at:'',note};
+  await saveData();render(true);toast(t('saved'));
+}
+/* shared engagement display used by admin track cards and reviewer schedule cards */
+function engagementBlock(b,editable){
+  const e=b.engagement||EMPTY_ENG();
+  const planU=(b.plan||{}).upload||'';
+  const actU=b.uploadDate||(b.stageDates||{}).Upload||'';
+  const dn=daysAfter(planU,actU);
+  const er=calcER(e), has=engHasData(e);
+  const conf=e.review&&e.review.status==='confirmed';
+  const metrics=[['views',e.views],['reach',e.reach],['likes',e.likes],['comments',e.comments],['saves',e.saves],['shares',e.shares],['follows',e.follows]];
+  const linkRow=`<div class="eng-link">
+    <b>${t('uploadedLink')}:</b> ${b.finalUrl?`<a href="${esc(b.finalUrl)}" target="_blank" rel="noopener">${esc(b.finalUrl.length>40?b.finalUrl.slice(0,40)+'…':b.finalUrl)}</a>`:`<span style="color:var(--muted)">${t('notUploaded')}</span>`}
+    ${actU?`<br><b>${t('uploadedOn')}:</b> ${esc(actU)}${dn?` <span class="dn-badge">${dn}</span>`:''}`:''}
+  </div>`;
+  const grid=has?`<div class="eng-grid">
+    ${metrics.map(([k,v])=>`<div class="eng-cell"><div class="eng-n">${fmtN(v)}</div><div class="eng-l">${t(k)}</div></div>`).join('')}
+    <div class="eng-cell"><div class="eng-n">${er}%</div><div class="eng-l">${t('er')}</div></div>
+  </div>`:`<div style="font-size:13px;color:var(--muted)">${t('noEngagement')}</div>`;
+  const caps=(e.captures||[]).length?`<div class="cap-row">
+    ${e.captures.map(c=>`<a href="${esc(c.link)}" target="_blank" rel="noopener" title="${t('openCapture')}"><img src="${esc(driveThumb(c.link))}" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.opacity=.25"></a>`).join('')}
+  </div>`:'';
+  const statusBadge=has?`<span class="eng-status ${conf?'ok':'pend'}">${conf?'✓ '+t('confirmedEng'):t('pending')}</span>`:'';
+  let actions='';
+  if(editable)actions+=`<button class="mini solid" onclick="openEngagementModal('${b.id}')">${has?t('editEngagement'):t('enterEngagement')}</button>`;
+  if(has)actions+=conf?`<button class="mini" onclick="reopenEngagement('${b.id}')">${t('reopenEng')}</button>`
+                      :`<button class="mini solid" onclick="confirmEngagement('${b.id}')">${t('confirmEng')}</button>`;
+  return `<div class="divider"></div>
+    <div class="eng-head">
+      <div class="eng-cap-h">${t('engTitle')}</div>${statusBadge}
+    </div>
+    ${linkRow}${grid}${caps}
+    ${actions?`<div class="wf-actions" style="margin-top:8px">${actions}</div>`:''}`;
 }
 
 /* ============================================================

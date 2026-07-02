@@ -325,6 +325,108 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--coral);outline-o
 .cap-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:4px}
 .cap-row img{width:74px;height:74px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,.08)}
 @media(max-width:560px){.eng-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* ===== NEW: Gate vertical layout & reports ===== */
+.role-col{display:flex;flex-direction:column;gap:10px;margin-bottom:8px}
+.role-btn{border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:#fff;
+  transition:.15s;text-align:left;display:flex;align-items:center;gap:12px}
+.role-btn:hover{border-color:var(--coral);transform:translateY(-1px);box-shadow:var(--shadow)}
+.role-btn .ic{font-size:22px;flex-shrink:0}
+.role-btn .rinfo{flex:1}
+.role-btn .t{display:block;font-weight:600;font-size:14px}
+.role-btn .d{display:block;font-size:11px;color:var(--muted);margin-top:2px}
+.role-btn .arr{color:var(--muted);font-size:18px}
+.gate-rp-section{margin-bottom:20px;width:100%;text-align:left}
+.gate-rp-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--coral-deep);margin-bottom:8px;display:block}
+.gate-rp-items{display:flex;flex-direction:column;gap:8px}
+.gate-rp-btn{background:rgba(255,255,255,.72);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.85);
+  border-radius:12px;padding:12px 16px;text-align:left;display:flex;align-items:center;gap:10px;
+  transition:.15s;width:100%;cursor:pointer}
+.gate-rp-btn:hover{background:#fff;box-shadow:var(--shadow);transform:translateY(-1px)}
+.gate-rp-name{font-weight:700;font-size:13px;color:var(--ink);display:block}
+.gate-rp-meta{font-size:11px;color:var(--muted);display:block;margin-top:1px}
+
+/* ===== NEW: Report page ===== */
+.rp-page{max-width:780px;margin:0 auto;padding:20px 20px 80px}
+.rp-back{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--muted);
+  border:1px solid var(--line);border-radius:8px;padding:7px 12px;background:#fff;margin-bottom:20px;cursor:pointer;transition:.15s}
+.rp-back:hover{border-color:var(--coral);color:var(--coral-deep)}
+.rp-hero{background:linear-gradient(135deg,var(--soft),#E8EFFE);border:1px solid var(--line);border-radius:20px;padding:28px;margin-bottom:20px}
+.rp-campaign-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--coral-deep);margin-bottom:6px}
+.rp-hero-title{font-family:'Fraunces';font-size:28px;font-weight:700;color:var(--ink);line-height:1.1;margin-bottom:12px}
+.rp-period-row{display:flex;gap:24px;flex-wrap:wrap}
+.rp-period-item{display:flex;flex-direction:column;gap:2px}
+.rp-period-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700}
+.rp-period-val{font-size:13px;font-weight:600;color:var(--ink)}
+.rp-er-card{background:linear-gradient(135deg,var(--glow1),var(--glow2));border-radius:16px;padding:22px 24px;
+  color:#fff;display:flex;align-items:flex-end;gap:12px;margin-bottom:12px}
+.rp-er-n{font-family:'Fraunces';font-size:56px;font-weight:700;line-height:1}
+.rp-er-info{display:flex;flex-direction:column;gap:2px;padding-bottom:6px}
+.rp-er-lbl{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+.rp-er-sub{font-size:12px;opacity:.75}
+.rp-stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-bottom:16px}
+.rp-stat-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 12px}
+.rp-stat-n{font-family:'Fraunces';font-size:24px;font-weight:600;line-height:1;color:var(--ink)}
+.rp-stat-l{font-size:11px;color:var(--muted);margin-top:4px}
+.rp-top1{background:var(--surface);border:2px solid var(--coral);border-radius:16px;padding:18px;
+  margin-bottom:16px;display:flex;align-items:center;gap:14px}
+.rp-top1-badge{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  background:var(--coral);color:#fff;border-radius:6px;padding:2px 8px;display:inline-block;margin-bottom:5px}
+.rp-top1-er{font-family:'Fraunces';font-size:26px;font-weight:700;color:var(--coral-deep)}
+.rp-top1-handle{font-weight:700;font-size:16px;color:var(--ink)}
+.rp-text-panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:14px}
+.rp-text-lbl{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.rp-text-body{font-size:14px;line-height:1.7;color:var(--ink);white-space:pre-line}
+.rp-section-head{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;
+  color:var(--muted);margin:20px 0 12px}
+.rp-inf-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:10px}
+.rp-inf-head{display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.rp-inf-er{font-family:'Fraunces';font-size:22px;font-weight:700;color:var(--coral-deep);margin-left:auto}
+.rp-inf-metrics{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:7px;margin-bottom:10px}
+.rp-inf-cell{background:var(--porcelain);border-radius:8px;padding:8px 6px;text-align:center}
+.rp-inf-n{font-size:14px;font-weight:700;color:var(--ink)}
+.rp-inf-l{font-size:9px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-top:2px}
+.rp-link-row{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;
+  color:var(--coral-deep);border:1px solid var(--line);border-radius:8px;padding:5px 10px;
+  text-decoration:none;background:#fff;margin:3px 3px 3px 0;transition:.15s}
+.rp-link-row:hover{border-color:var(--coral);background:var(--soft);text-decoration:none}
+
+/* ===== NEW: Upload links in track card ===== */
+.ul-section{margin-top:14px}
+.ul-section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.ul-section-lbl{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.ul-row{display:flex;gap:7px;align-items:center;margin-bottom:6px;flex-wrap:wrap;
+  background:var(--porcelain);border-radius:10px;padding:8px 10px}
+.ul-plat{font-size:11px;font-weight:700;padding:2px 7px;border-radius:6px;background:var(--soft);
+  color:var(--coral-deep);flex-shrink:0}
+.ul-url{font-size:12px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* ===== NEW: Per-link engagement ===== */
+.leng-block{border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:10px;background:#fff}
+.leng-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.leng-plat{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;background:var(--soft);color:var(--coral-deep)}
+.leng-lbl{font-size:12px;font-weight:700;color:var(--ink);flex:1}
+.leng-er{font-family:'Fraunces';font-size:20px;font-weight:700;color:var(--coral-deep)}
+.leng-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px}
+.leng-cell{background:var(--porcelain);border-radius:8px;padding:7px;text-align:center}
+.leng-n{font-size:13px;font-weight:700;color:var(--ink)}
+.leng-l{font-size:9px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-top:2px}
+
+/* ===== NEW: Report builder tab ===== */
+.rpb-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px;margin-bottom:12px;display:flex;align-items:center;gap:12px}
+.rpb-info{flex:1}
+.rpb-name{font-weight:700;font-size:15px;color:var(--ink)}
+.rpb-meta{font-size:12px;color:var(--muted);margin-top:3px}
+.er-row{display:flex;gap:7px;align-items:center;margin-bottom:6px;flex-wrap:wrap}
+
+@media(max-width:560px){
+  .rp-stat-grid{grid-template-columns:repeat(2,1fr)}
+  .leng-grid{grid-template-columns:repeat(2,1fr)}
+  .rp-inf-metrics{grid-template-columns:repeat(3,1fr)}
+  .rp-er-n{font-size:40px}
+}
 </style>
 </head>
 <body>
@@ -344,7 +446,12 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--coral);outline-o
     </svg>
   </div>
   <div class="gate-inner">
-    <!-- LOGO: uses BABYGLOW-LOGO-PURPLE-768x525.png at the repo root. Use the transparent version (the original has a black background). Falls back to a styled wordmark if the file is missing. -->
+    <!-- Reports section -->
+    <div id="gateRpSection" class="gate-rp-section hidden">
+      <span class="gate-rp-label">📊 Campaign Reports</span>
+      <div id="gateRpItems" class="gate-rp-items"></div>
+    </div>
+    <!-- LOGO -->
     <div class="gate-logo-wrap">
       <img class="gate-logo" src="BABYGLOW-LOGO-PURPLE-768x525.png" alt="babyGLOW by Teoxane"
            onerror="this.style.display='none';document.getElementById('gateLogoText').style.display='block'">
@@ -353,25 +460,43 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--coral);outline-o
     <div class="gate-card">
       <div class="gate-sub">Campaign Console</div>
       <div class="gate-tagline">Who's signing in?</div>
-    <div class="role-row">
-      <button class="role-btn" onclick="chooseRole('viewer')">
-        <span class="ic">👀</span><span class="t">Reviewer</span>
-        <span class="d">Watch & request edits</span>
-      </button>
-      <button class="role-btn" onclick="chooseRole('admin')">
-        <span class="ic">⚙️</span><span class="t">Admin</span>
-        <span class="d">Manage the campaign</span>
-      </button>
-    </div>
-    <div id="pwWrap" class="pw-wrap hidden">
-      <label>Admin password</label>
-      <div class="pw-row">
-        <input id="pwInput" type="password" placeholder="••••" onkeydown="if(event.key==='Enter')tryAdmin()">
-        <button class="btn-primary" onclick="tryAdmin()">Enter</button>
+      <div class="role-col">
+        <button class="role-btn" onclick="chooseRole('viewer')">
+          <span class="ic">👀</span>
+          <span class="rinfo"><span class="t">Reviewer</span><span class="d">Watch & request edits</span></span>
+          <span class="arr">›</span>
+        </button>
+        <button class="role-btn" onclick="chooseRole('admin')">
+          <span class="ic">⚙️</span>
+          <span class="rinfo"><span class="t">Admin</span><span class="d">Manage the campaign</span></span>
+          <span class="arr">›</span>
+        </button>
       </div>
-      <div id="pwErr" class="err"></div>
+      <div id="pwWrap" class="pw-wrap hidden">
+        <label>Admin password</label>
+        <div class="pw-row">
+          <input id="pwInput" type="password" placeholder="••••" onkeydown="if(event.key==='Enter')tryAdmin()">
+          <button class="btn-primary" onclick="tryAdmin()">Enter</button>
+        </div>
+        <div id="pwErr" class="err"></div>
+      </div>
     </div>
+  </div>
+</div>
+
+<!-- REPORT PAGE (full-page view) -->
+<div id="reportPage" class="hidden" style="min-height:100vh;background:var(--porcelain)">
+  <div style="position:sticky;top:0;z-index:40;background:rgba(243,244,252,.92);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);padding:12px 20px;display:flex;align-items:center;gap:14px">
+    <button class="rp-back" style="margin:0" onclick="closeReportPage()">← Back</button>
+    <div style="display:flex;align-items:center;gap:8px">
+      <img src="BABYGLOW-LOGO-PURPLE-768x525.png" alt="babyGLOW" style="height:28px;width:auto"
+           onerror="this.style.display='none'">
+      <span style="font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.06em">CAMPAIGN REPORT</span>
     </div>
+  </div>
+  <div class="rp-page">
+    <div id="reportPageContent"></div>
   </div>
 </div>
 
@@ -522,12 +647,32 @@ const I18N={
   }
 };
 
+/* ===== NEW: Data models ===== */
+function EMPTY_UL(){return {id:uid('ul'),platform:'ig',label:'',url:''};}
+function EMPTY_LINK_ENG(uploadLinkId){
+  return {id:uid('eng'),uploadLinkId:uploadLinkId||'',
+    likes:0,shares:0,comments:0,saves:0,reposts:0,views:0,
+    customMetrics:[],screenshotLink:'',er:0};
+}
+function EMPTY_REPORT(){
+  return {id:uid('rp'),name:'',periodType:'date',dateFrom:'',dateTo:'',
+    selectedInfluencers:[],analysis:'',suggestion:'',extraReports:[]};
+}
+function calcLinkER(e){
+  if(!e||!num(e.views))return 0;
+  const actions=num(e.likes)+num(e.shares)+num(e.comments)+num(e.saves)+num(e.reposts)+
+    (e.customMetrics||[]).reduce((s,m)=>s+num(m.value),0);
+  return Math.round(actions/num(e.views)*1000)/10;
+}
+let _tmpExtraRPs=[];
+
 /* ---------- seed data (imported from babyGLOW_Campaign_2026-06-11.xlsx) ---------- */
 function seed(){
   return {
     influencers:[{"id": "i1", "h": "asa.asanoyu", "realName": "", "area": "Ramintra / Fashion Island", "dates": "11, 13", "ig": "https://www.instagram.com/asa.asanoyu", "igF": "27K", "tt": "https://www.tiktok.com/@asa.asanoyu", "ttF": "442.3K", "note": "", "status": "secured", "photoUrl": ""}, {"id": "i2", "h": "ningningsc", "realName": "สุวภัทร ชุมแก้ว", "area": "", "dates": "19", "ig": "https://www.instagram.com/ningningsc/", "igF": "14.6K", "tt": "https://www.tiktok.com/@ningningsc", "ttF": "", "note": "", "status": "confirmed", "photoUrl": ""}, {"id": "i3", "h": "Senw.y", "realName": "วรเศรษฐ์ ยิ่งกิจภิญโญ", "area": "IconSiam / BKK", "dates": "11", "ig": "https://www.instagram.com/senw.y", "igF": "13.8K", "tt": "https://www.tiktok.com/@senw.y", "ttF": "20.4K", "note": "", "status": "confirmed", "photoUrl": ""}, {"id": "i4", "h": "Perjidakarnn", "realName": "จิฎากาญจน์ ศิริพงศ์อัคร", "area": "Sukhumvit 101/1", "dates": "19", "ig": "https://www.instagram.com/perjidakarnn", "igF": "7.1K", "tt": "https://www.tiktok.com/@per_jidakarn", "ttF": "18.5K", "note": "", "status": "confirmed", "photoUrl": ""}, {"id": "i5", "h": "Tarrtar", "realName": "", "area": "Ramintra / Ari / Siam", "dates": "12-13", "ig": "https://www.instagram.com/tarrtar", "igF": "26K", "tt": "https://www.tiktok.com/@tarrtarv", "ttF": "3K", "note": "", "status": "secured", "photoUrl": ""}, {"id": "i6", "h": "baiiyook_", "realName": "ชุติกาญจน์ พิสิษฐ์เดชากุล", "area": "Greater Bangkok", "dates": "19", "ig": "https://www.instagram.com/baiiyook_/", "igF": "10.2K", "tt": "https://www.tiktok.com/@boobaiiyook", "ttF": "21.2K", "note": "", "status": "confirmed", "photoUrl": ""}, {"id": "i7", "h": "Bbillysr", "realName": "สรายุทธ เสือมาก", "area": "Siam", "dates": "12", "ig": "https://www.instagram.com/bbillysr/", "igF": "166K", "tt": "https://www.tiktok.com/@bbillysr/", "ttF": "13.2K", "note": "", "status": "confirmed", "photoUrl": ""}, {"id": "i8", "h": "uponiz", "realName": "", "area": "Ratchayothin / Ratchada / Huai Khwang / Lat Phrao", "dates": "22-25, 29-30", "ig": "https://www.instagram.com/uponiz", "igF": "36.6K", "tt": "https://www.tiktok.com/@uponiz", "ttF": "10.8K", "note": "", "status": "secured", "photoUrl": ""}, {"id": "i9", "h": "Umimsaruu.u", "realName": "", "area": "Sukhumvit", "dates": "", "ig": "https://www.instagram.com/umimsaru.u", "igF": "18.6K", "tt": "https://www.tiktok.com/@saruu.j", "ttF": "43.9K", "note": "", "status": "secured", "photoUrl": ""}, {"id": "i10", "h": "aya.official59", "realName": "", "area": "Sukhumvit", "dates": "", "ig": "https://www.instagram.com/aya.official59", "igF": "29.4K", "tt": "https://www.tiktok.com/@aya.official59", "ttF": "36.1K", "note": "", "status": "secured", "photoUrl": ""}, {"id": "i11", "h": "dreamdrmm", "realName": "", "area": "Ekkamai / Thonglor / Suan Luang / Rama 9", "dates": "", "ig": "https://instagram.com/dreamdrmm", "igF": "31K", "tt": "https://www.tiktok.com/@dreamdrmm", "ttF": "29.4K", "note": "", "status": "secured", "photoUrl": ""}, {"id": "i12", "h": "Superlinllyn", "realName": "คชามาศ สกุลทอง", "area": "", "dates": "", "ig": "https://www.instagram.com/superlinllyn", "igF": "21K", "tt": "https://www.tiktok.com/@superlinllyn", "ttF": "10.8K", "note": "", "status": "confirmed", "photoUrl": ""}, {"id": "i13", "h": "Pimpraeww", "realName": "", "area": "", "dates": "13", "ig": "https://www.instagram.com/pimpraeww", "igF": "18.6K", "tt": "https://www.tiktok.com/@pimpraeww", "ttF": "1.3K", "note": "", "status": "secured", "photoUrl": ""}, {"id": "i14", "h": "Saraitsmeh", "realName": "", "area": "Prawet / Chaloem Phrakiat", "dates": "10-11-12", "ig": "https://www.instagram.com/saraitsmeh/", "igF": "77.6K", "tt": "https://www.tiktok.com/@saraitsmehlol", "ttF": "19.6K", "note": "", "status": "secured", "photoUrl": ""}, {"id": "i15", "h": "Foxie.way", "realName": "", "area": "Thian Thalee Rama 2", "dates": "", "ig": "https://www.instagram.com/foxie.way/", "igF": "50.2K", "tt": "", "ttF": "", "note": "", "status": "secured", "photoUrl": ""}, {"id": "i16", "h": "Onlyaclairr", "realName": "", "area": "", "dates": "13", "ig": "https://www.instagram.com/onlyaclairr", "igF": "17.7K", "tt": "https://www.tiktok.com/@onlyaclairr", "ttF": "0.6K", "note": "", "status": "secured", "photoUrl": ""}, {"id": "i17", "h": "ผู้ใหญ่ต้อ สาวสอง", "realName": "", "area": "", "dates": "17-18-19", "ig": "https://www.instagram.com/chertam.nat", "igF": "1.6K", "tt": "https://www.tiktok.com/@chertam1711", "ttF": "123.2K", "note": "", "status": "secured", "photoUrl": ""}, {"id": "i18", "h": "Offteerapat", "realName": "", "area": "", "dates": "13", "ig": "https://www.instagram.com/offteerapat", "igF": "10K", "tt": "", "ttF": "", "note": "", "status": "secured", "photoUrl": ""}, {"id": "i19", "h": "Dd_niramol", "realName": "นิรมล ประยูรหงษ์", "area": "BKK", "dates": "19", "ig": "https://www.instagram.com/dd_niramol", "igF": "17.6K", "tt": "https://www.tiktok.com/@puhyerin", "ttF": "121.1K", "note": "", "status": "confirmed", "photoUrl": ""}, {"id": "i20", "h": "ggift.knw", "realName": "", "area": "BKK", "dates": "", "ig": "https://www.instagram.com/ggift.knw", "igF": "31.4K", "tt": "", "ttF": "", "note": "Check clinic availability first", "status": "secured", "photoUrl": ""}, {"id": "i21", "h": "iaumm", "realName": "", "area": "BKK", "dates": "", "ig": "https://www.instagram.com/iaumm___", "igF": "15.8K", "tt": "", "ttF": "", "note": "Check clinic availability first", "status": "secured", "photoUrl": ""}, {"id": "i22", "h": "lyslynette", "realName": "", "area": "BKK", "dates": "", "ig": "https://www.instagram.com/lyslynette/", "igF": "39.3K", "tt": "", "ttF": "", "note": "Check clinic availability first", "status": "secured", "photoUrl": ""}, {"id": "i23", "h": "eeprisaa", "realName": "", "area": "BKK", "dates": "", "ig": "https://www.instagram.com/eeprisaa/", "igF": "10.3K", "tt": "", "ttF": "", "note": "Wants to shoot next week", "status": "secured", "photoUrl": ""}, {"id": "i24", "h": "namtanstp", "realName": "", "area": "BKK", "dates": "", "ig": "https://www.instagram.com/namtanstp", "igF": "11.3K", "tt": "", "ttF": "", "note": "Check clinic availability first", "status": "secured", "photoUrl": ""}, {"id": "i25", "h": "suwaniya", "realName": "", "area": "BKK", "dates": "", "ig": "https://www.instagram.com/suwaniya/", "igF": "12.9K", "tt": "", "ttF": "", "note": "Check clinic availability first", "status": "secured", "photoUrl": ""}, {"id": "i26", "h": "bbewt", "realName": "", "area": "BKK", "dates": "", "ig": "https://www.instagram.com/bbewt/", "igF": "16.1K", "tt": "", "ttF": "", "note": "Just had hydrobooster", "status": "secured", "photoUrl": ""}, {"id": "i27", "h": "mewyu.nikko", "realName": "", "area": "BKK", "dates": "", "ig": "https://www.instagram.com/mewyu.nikko/reels/", "igF": "22.7K", "tt": "", "ttF": "", "note": "Check clinic availability first", "status": "secured", "photoUrl": ""}, {"id": "i28", "h": "mycookiehouse", "realName": "", "area": "BKK", "dates": "", "ig": "https://www.instagram.com/mycookie.house_/", "igF": "30K", "tt": "", "ttF": "", "note": "Check clinic availability first", "status": "secured", "photoUrl": ""}, {"id": "i29", "h": "mamuaymaru", "realName": "", "area": "BKK", "dates": "", "ig": "https://www.instagram.com/mmuaymaru/reels/", "igF": "96.7K", "tt": "", "ttF": "", "note": "Check clinic availability first", "status": "secured", "photoUrl": ""}, {"id": "i30", "h": "memaima", "realName": "", "area": "BKK", "dates": "", "ig": "https://www.instagram.com/memaima/", "igF": "22.9K", "tt": "", "ttF": "", "note": "Check clinic availability first", "status": "secured", "photoUrl": ""}, {"id": "i31", "h": "sssupisara__", "realName": "", "area": "BKK", "dates": "after June", "ig": "https://www.instagram.com/sssupisara__/", "igF": "32K", "tt": "", "ttF": "", "note": "6월 이후 가능", "status": "candidate", "photoUrl": ""}, {"id": "i32", "h": "J.anekit", "realName": "", "area": "", "dates": "", "ig": "https://www.instagram.com/j.anekit", "igF": "23.8K", "tt": "", "ttF": "", "note": "", "status": "secured", "photoUrl": ""}, {"id": "i33", "h": "nanana.namii", "realName": "", "area": "", "dates": "", "ig": "https://www.instagram.com/nanana.namii/", "igF": "12.4K", "tt": "", "ttF": "", "note": "6월 이후 가능", "status": "candidate", "photoUrl": ""}, {"id": "i34", "h": "leeidaa", "realName": "", "area": "", "dates": "", "ig": "https://www.instagram.com/leeidaa/", "igF": "24.4K", "tt": "", "ttF": "", "note": "6월 이후 가능", "status": "candidate", "photoUrl": ""}, {"id": "i35", "h": "punanchittha", "realName": "", "area": "", "dates": "", "ig": "https://www.instagram.com/punanchittha/?hl=th", "igF": "22.9K", "tt": "", "ttF": "", "note": "6월 이후 간능", "status": "candidate", "photoUrl": ""}],
     clinics:[{"id": "c1", "name": "Reva Clinic", "branch": "Stadium One", "mapUrl": "https://maps.app.goo.gl/XU3gijzaDFMTD93x7"}, {"id": "c2", "name": "Atier Wellness", "branch": "Phatthanakan", "mapUrl": "https://maps.app.goo.gl/CNcwswz9VsarqynEA"}, {"id": "c3", "name": "Kalm Clinic", "branch": "", "mapUrl": ""}],
-    bookings:[{"id": "bk1", "infId": "i2", "clinicId": "c2", "date": "2026-06-19", "time": "12:00", "stage": "confirmed", "footageUrl": "", "finalUrl": "", "uploadDate": "", "plan": {"footage": "2026-06-22", "upload": "2026-06-24"}, "stageDates": {}, "revisions": []}, {"id": "bk2", "infId": "i3", "clinicId": "c1", "date": "2026-06-11", "time": "14:00", "stage": "confirmed", "footageUrl": "", "finalUrl": "", "uploadDate": "", "plan": {"footage": "2026-06-14", "upload": "2026-06-24"}, "stageDates": {}, "revisions": []}, {"id": "bk3", "infId": "i4", "clinicId": "c2", "date": "2026-06-19", "time": "12:00", "stage": "confirmed", "footageUrl": "", "finalUrl": "", "uploadDate": "", "plan": {"footage": "2026-06-11", "upload": "2026-06-24"}, "stageDates": {}, "revisions": []}, {"id": "bk4", "infId": "i6", "clinicId": "c2", "date": "2026-06-19", "time": "12:00", "stage": "confirmed", "footageUrl": "", "finalUrl": "", "uploadDate": "", "plan": {"footage": "2026-06-11", "upload": "2026-06-24"}, "stageDates": {}, "revisions": []}, {"id": "bk5", "infId": "i7", "clinicId": "c1", "date": "2026-06-12", "time": "15:00", "stage": "confirmed", "footageUrl": "", "finalUrl": "", "uploadDate": "", "plan": {"footage": "2026-06-16", "upload": "2026-06-24"}, "stageDates": {}, "revisions": []}, {"id": "bk6", "infId": "i11", "clinicId": "c3", "date": "", "time": "", "stage": "confirmed", "footageUrl": "", "finalUrl": "", "uploadDate": "", "plan": {"footage": "2026-06-11", "upload": "2026-06-24"}, "stageDates": {}, "revisions": []}, {"id": "bk7", "infId": "i12", "clinicId": "c1", "date": "2026-06-10", "time": "18:00", "stage": "filmed", "footageUrl": "", "finalUrl": "", "uploadDate": "", "plan": {"footage": "2026-06-13", "upload": "2026-06-24"}, "stageDates": {"visited": "2026-06-11"}, "revisions": []}, {"id": "bk8", "infId": "i19", "clinicId": "c2", "date": "2026-06-19", "time": "12:00", "stage": "confirmed", "footageUrl": "", "finalUrl": "", "uploadDate": "", "plan": {"footage": "2026-06-11", "upload": "2026-06-24"}, "stageDates": {}, "revisions": []}, {"id": "bk9", "infId": "i32", "clinicId": "c3", "date": "", "time": "", "stage": "confirmed", "footageUrl": "", "finalUrl": "", "uploadDate": "", "plan": {}, "stageDates": {}, "revisions": []}]
+    bookings:[{"id": "bk1", "infId": "i2", "clinicId": "c2", "date": "2026-06-19", "time": "12:00", "stage": "confirmed", "footageUrl": "", "finalUrl": "", "uploadDate": "", "plan": {"footage": "2026-06-22", "upload": "2026-06-24"}, "stageDates": {}, "revisions": [], "uploadLinks": [], "engagements": []}, {"id": "bk2", "infId": "i3", "clinicId": "c1", "date": "2026-06-11", "time": "14:00", "stage": "confirmed", "footageUrl": "", "finalUrl": "", "uploadDate": "", "plan": {"footage": "2026-06-14", "upload": "2026-06-24"}, "stageDates": {}, "revisions": [], "uploadLinks": [], "engagements": []}, {"id": "bk3", "infId": "i4", "clinicId": "c2", "date": "2026-06-19", "time": "12:00", "stage": "confirmed", "footageUrl": "", "finalUrl": "", "uploadDate": "", "plan": {"footage": "2026-06-11", "upload": "2026-06-24"}, "stageDates": {}, "revisions": [], "uploadLinks": [], "engagements": []}, {"id": "bk4", "infId": "i6", "clinicId": "c2", "date": "2026-06-19", "time": "12:00", "stage": "confirmed", "footageUrl": "", "finalUrl": "", "uploadDate": "", "plan": {"footage": "2026-06-11", "upload": "2026-06-24"}, "stageDates": {}, "revisions": [], "uploadLinks": [], "engagements": []}, {"id": "bk5", "infId": "i7", "clinicId": "c1", "date": "2026-06-12", "time": "15:00", "stage": "confirmed", "footageUrl": "", "finalUrl": "", "uploadDate": "", "plan": {"footage": "2026-06-16", "upload": "2026-06-24"}, "stageDates": {}, "revisions": [], "uploadLinks": [], "engagements": []}, {"id": "bk6", "infId": "i11", "clinicId": "c3", "date": "", "time": "", "stage": "confirmed", "footageUrl": "", "finalUrl": "", "uploadDate": "", "plan": {"footage": "2026-06-11", "upload": "2026-06-24"}, "stageDates": {}, "revisions": [], "uploadLinks": [], "engagements": []}, {"id": "bk7", "infId": "i12", "clinicId": "c1", "date": "2026-06-10", "time": "18:00", "stage": "filmed", "footageUrl": "", "finalUrl": "", "uploadDate": "", "plan": {"footage": "2026-06-13", "upload": "2026-06-24"}, "stageDates": {"visited": "2026-06-11"}, "revisions": [], "uploadLinks": [], "engagements": []}, {"id": "bk8", "infId": "i19", "clinicId": "c2", "date": "2026-06-19", "time": "12:00", "stage": "confirmed", "footageUrl": "", "finalUrl": "", "uploadDate": "", "plan": {"footage": "2026-06-11", "upload": "2026-06-24"}, "stageDates": {}, "revisions": [], "uploadLinks": [], "engagements": []}, {"id": "bk9", "infId": "i32", "clinicId": "c3", "date": "", "time": "", "stage": "confirmed", "footageUrl": "", "finalUrl": "", "uploadDate": "", "plan": {}, "stageDates": {}, "revisions": [], "uploadLinks": [], "engagements": []}],
+    reports:[]
   };
 }
 /* ---------- storage ---------- */
@@ -661,9 +806,10 @@ function setupChrome(){
     const defs=[['influencers','tab_influencers',DB.influencers.length],
                 ['clinics','tab_clinics',DB.clinics.length],
                 ['reviews','tab_reviews',DB.bookings.length],
-                ['track','tab_track',DB.bookings.length]];
+                ['track','tab_track',DB.bookings.length],
+                ['reports',null,(DB.reports||[]).length]];
     tabs.innerHTML=defs.map(([k,lab,n])=>
-      `<button class="tab ${state.tab===k?'on':''}" onclick="setTab('${k}')">${t(lab)}<span class="count">${n}</span></button>`).join('');
+      `<button class="tab ${state.tab===k?'on':''}" onclick="setTab('${k}')">${lab?t(lab):'리포트 만들기'}<span class="count">${n}</span></button>`).join('');
     tabs.classList.remove('hidden');
   }else{
     const defs=[['rv_schedule','tab_schedule'],['rv_stats','tab_stats'],['rv_influencers','tab_influencers'],['rv_clinics','tab_clinics']];
@@ -696,12 +842,23 @@ function migrate(){
   if(!DB||!Array.isArray(DB.bookings))return;
   DB.bookings.forEach(b=>{
     const d=EMPTY_ENG();
-    if(!b.engagement||typeof b.engagement!=='object'){b.engagement=d;return;}
-    const e=b.engagement;
-    for(const k in d){if(e[k]===undefined)e[k]=d[k];}
-    if(!e.review||typeof e.review!=='object')e.review={status:'pending',by:'',at:'',note:''};
-    if(!Array.isArray(e.captures))e.captures=[];
+    if(!b.engagement||typeof b.engagement!=='object'){b.engagement=d;}
+    else{
+      const e=b.engagement;
+      for(const k in d){if(e[k]===undefined)e[k]=d[k];}
+      if(!e.review||typeof e.review!=='object')e.review={status:'pending',by:'',at:'',note:''};
+      if(!Array.isArray(e.captures))e.captures=[];
+    }
+    // New fields
+    if(!Array.isArray(b.uploadLinks))b.uploadLinks=[];
+    if(!Array.isArray(b.engagements))b.engagements=[];
+    // Ensure engagement entries match upload links
+    b.uploadLinks.forEach(ul=>{
+      if(!b.engagements.find(e=>e.uploadLinkId===ul.id))
+        b.engagements.push(EMPTY_LINK_ENG(ul.id));
+    });
   });
+  if(!Array.isArray(DB.reports))DB.reports=[];
 }
 function num(v){const n=Number(v);return isNaN(n)?0:n;}
 function fmtN(n){return (Number(n)||0).toLocaleString('en-US');}
@@ -797,6 +954,7 @@ async function render(keepScroll){
   else if(state.tab==='clinics')html=viewClinics();
   else if(state.tab==='reviews')html=viewReviews();
   else if(state.tab==='track')html=viewTrack();
+  else if(state.tab==='reports')html=viewReportBuilder();
   if(Store.mode==='local')html=`<div class="note-bar">⚠ <span>${t('localNote')}</span></div>`+html;
   v.innerHTML=html;
   if(sy!=null)window.scrollTo(0,sy);
@@ -962,10 +1120,7 @@ function trackCard(b){
       <input id="fu_${b.id}" value="${esc(b.footageType==='link'?b.footageUrl:'')}" placeholder="https://drive.google.com/… · youtube.com/… · …mp4">
       <button class="mini" onclick="setVideoLink('${b.id}',document.getElementById('fu_${b.id}').value)">${t('save')}</button>
     </div>
-    <div class="field-row"><label>${t('finalUrl')}</label>
-      <input id="vu_${b.id}" value="${esc(b.finalUrl)}" placeholder="https://…">
-      <button class="mini" onclick="saveBookingField('${b.id}','finalUrl',document.getElementById('vu_${b.id}').value)">${t('save')}</button>
-    </div>
+    ${uploadLinksSection(b)}
     <div class="divider"></div>
     <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:6px">${t('timelineDates')}</div>
     <div class="dgrid">
@@ -986,7 +1141,7 @@ function trackCard(b){
     <div class="divider"></div>
     <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:8px">${t('revisions')} (${(b.revisions||[]).length})</div>
     <div class="rev-thread">${revs||`<div style="font-size:13px;color:var(--muted)">${t('noRevYet')}</div>`}</div>
-    ${engagementBlock(b,true)}
+    ${linkEngagementsSection(b,true)}
   </div>`;
 }
 
@@ -1232,6 +1387,7 @@ function viewerScheduleCard(b){
       <div class="ms ${Upload?'on':''}"><span class="msdot">${Upload?'✓':''}</span><span class="mslab">Upload${Upload?done(b.uploadDate||sd.Upload):exp(pl.upload)}</span></div>
     </div>
     ${src?videoEmbed(src):`<div class="no-video">First Edit video not delivered yet.</div>`}
+    ${uploadLinksViewerSection(b)}
     ${src?`
       <div class="divider"></div>
       <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:8px">Revision requests</div>
@@ -1240,7 +1396,7 @@ function viewerScheduleCard(b){
         <input id="rev_${b.id}" placeholder="Describe the change you need…">
         <button class="mini solid" onclick="addRevision('${b.id}','viewer',document.getElementById('rev_${b.id}').value)">Send request</button>
       </div>`}`:''}
-    ${engagementBlock(b,false)}
+    ${linkEngagementsSection(b,false)}
   </div>`;
 }
 
@@ -1581,6 +1737,589 @@ function toast(msg){
   const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');
   clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('show'),1800);
 }
+
+/* ============================================================
+   UPLOAD LINKS
+   ============================================================ */
+function uploadLinksSection(b){
+  const uls=b.uploadLinks||[];
+  const rows=uls.map(ul=>`
+    <div class="ul-row">
+      <span class="ul-plat">${esc(ul.platform||ul.label||'Link')}</span>
+      <span class="ul-url">${ul.url?`<a href="${esc(ul.url)}" target="_blank" rel="noopener">${esc(ul.url.length>48?ul.url.slice(0,48)+'…':ul.url)}</a>`:'<span style="color:var(--muted)">No URL</span>'}</span>
+      <button class="mini" onclick="openUploadLinkModal('${b.id}','${ul.id}')">Edit</button>
+      <button class="mini" onclick="delUploadLink('${b.id}','${ul.id}')">Del</button>
+    </div>`).join('');
+  return `<div class="ul-section">
+    <div class="ul-section-head">
+      <span class="ul-section-lbl">Upload Links</span>
+      <button class="mini solid" onclick="openUploadLinkModal('${b.id}')">+ Add link</button>
+    </div>
+    ${rows||'<div style="font-size:13px;color:var(--muted);padding:6px 0">No upload links yet</div>'}
+  </div>`;
+}
+function uploadLinksViewerSection(b){
+  const uls=(b.uploadLinks||[]).filter(ul=>ul.url);
+  if(!uls.length)return '';
+  return `<div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:6px">
+    ${uls.map(ul=>`<a href="${esc(ul.url)}" target="_blank" rel="noopener" class="rp-link-row">
+      <span style="font-size:11px;font-weight:700;background:var(--soft);color:var(--coral-deep);padding:1px 6px;border-radius:4px">${esc(ul.platform||ul.label||'Link')}</span>
+      <span>${esc(ul.url.length>35?ul.url.slice(0,35)+'…':ul.url)}</span> ↗
+    </a>`).join('')}
+  </div>`;
+}
+function openUploadLinkModal(bid,ulid){
+  const b=DB.bookings.find(x=>x.id===bid);if(!b)return;
+  const ul=ulid?(b.uploadLinks||[]).find(x=>x.id===ulid):null;
+  const platOpts=[['ig','Instagram'],['tt','TikTok'],['youtube','YouTube'],['other','Other']].map(([v,l])=>
+    `<option value="${v}" ${ul&&ul.platform===v?'selected':''}>${l}</option>`).join('');
+  const body=`<div class="form-grid">
+    <div class="field"><label>Platform</label><select id="ul_plat">${platOpts}</select></div>
+    <div class="field full"><label>Label (optional custom name)</label><input id="ul_label" value="${esc(ul&&ul.label||'')}" placeholder="e.g. Instagram Reel"></div>
+    <div class="field full"><label>URL</label><input id="ul_url" value="${esc(ul&&ul.url||'')}" placeholder="https://…"></div>
+  </div>`;
+  modalShell(ulid?'Edit Upload Link':'Add Upload Link',body,
+    `<button class="btn-ghost" onclick="closeModal()">Cancel</button>
+     <button class="btn-primary" onclick="saveUploadLink('${bid}','${ulid||''}')">Save</button>`);
+}
+async function saveUploadLink(bid,ulid){
+  const b=DB.bookings.find(x=>x.id===bid);if(!b)return;
+  if(!b.uploadLinks)b.uploadLinks=[];
+  const plat=document.getElementById('ul_plat').value;
+  const label=(document.getElementById('ul_label').value||'').trim();
+  const url=(document.getElementById('ul_url').value||'').trim();
+  if(ulid){
+    const ul=b.uploadLinks.find(x=>x.id===ulid);
+    if(ul){ul.platform=plat;ul.label=label;ul.url=url;}
+  }else{
+    const newUl={id:uid('ul'),platform:plat,label,url};
+    b.uploadLinks.push(newUl);
+    if(!b.engagements)b.engagements=[];
+    b.engagements.push(EMPTY_LINK_ENG(newUl.id));
+    // sync finalUrl for backward compat
+    if(!b.finalUrl&&url)b.finalUrl=url;
+  }
+  await saveData();closeModal();render(true);toast(t('saved'));
+}
+async function delUploadLink(bid,ulid){
+  if(!confirm('Delete this upload link?'))return;
+  const b=DB.bookings.find(x=>x.id===bid);if(!b)return;
+  b.uploadLinks=(b.uploadLinks||[]).filter(x=>x.id!==ulid);
+  b.engagements=(b.engagements||[]).filter(x=>x.uploadLinkId!==ulid);
+  await saveData();render(true);toast(t('saved'));
+}
+
+/* ============================================================
+   PER-LINK ENGAGEMENT
+   ============================================================ */
+function linkEngagementsSection(b,editable){
+  const uls=b.uploadLinks||[];
+  const engs=b.engagements||[];
+  if(!uls.length&&!engs.length)return '';
+  let html=`<div class="divider"></div><div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:14px 0 10px">Engagement</div><div>`;
+  uls.forEach(ul=>{
+    const eng=engs.find(e=>e.uploadLinkId===ul.id);
+    if(eng)html+=linkEngBlock(b,ul,eng,editable);
+  });
+  engs.filter(e=>!uls.find(ul=>ul.id===e.uploadLinkId)).forEach(eng=>{
+    html+=linkEngBlock(b,null,eng,editable);
+  });
+  html+=`</div>`;
+  return html;
+}
+function linkEngBlock(b,ul,eng,editable){
+  const er=calcLinkER(eng);
+  const hasData=num(eng.views)||num(eng.likes)||num(eng.shares)||num(eng.comments)||num(eng.saves)||num(eng.reposts);
+  const label=ul?(ul.label||ul.platform||'Link'):'Engagement';
+  return `<div class="leng-block">
+    <div class="leng-head">
+      ${ul?`<span class="leng-plat">${esc(ul.platform||ul.label||'')}</span>`:''}
+      <span class="leng-lbl">${esc(label)}</span>
+      ${hasData?`<span class="leng-er">${er}% ER</span>`:''}
+      ${editable?`
+        <button class="mini" onclick="openLinkEngModal('${b.id}','${eng.id}')">Edit</button>
+        <button class="mini" onclick="delLinkEng('${b.id}','${eng.id}')">Del</button>`:''}
+    </div>
+    ${hasData?`<div class="leng-grid">
+      <div class="leng-cell"><div class="leng-n">${fmtN(eng.views)}</div><div class="leng-l">Views</div></div>
+      <div class="leng-cell"><div class="leng-n">${fmtN(eng.likes)}</div><div class="leng-l">Likes</div></div>
+      <div class="leng-cell"><div class="leng-n">${fmtN(eng.shares)}</div><div class="leng-l">Shares</div></div>
+      <div class="leng-cell"><div class="leng-n">${fmtN(eng.comments)}</div><div class="leng-l">Comments</div></div>
+      <div class="leng-cell"><div class="leng-n">${fmtN(eng.saves)}</div><div class="leng-l">Saves</div></div>
+      <div class="leng-cell"><div class="leng-n">${fmtN(eng.reposts)}</div><div class="leng-l">Reposts</div></div>
+      ${(eng.customMetrics||[]).map(m=>`<div class="leng-cell"><div class="leng-n">${fmtN(m.value)}</div><div class="leng-l">${esc(m.name||'—')}</div></div>`).join('')}
+    </div>`:`<div style="font-size:12px;color:var(--muted);padding:4px 0">No data yet — click Edit to enter</div>`}
+    ${eng.screenshotLink?`<a href="${esc(eng.screenshotLink)}" target="_blank" rel="noopener" class="rp-link-row" style="margin-top:6px;display:inline-flex">📸 Screenshot ↗</a>`:''}
+  </div>`;
+}
+function openLinkEngModal(bid,engid){
+  const b=DB.bookings.find(x=>x.id===bid);if(!b)return;
+  const eng=(b.engagements||[]).find(e=>e.id===engid);if(!eng)return;
+  const ul=(b.uploadLinks||[]).find(u=>u.id===eng.uploadLinkId);
+  const x=inf(b.infId)||{h:'?'};
+  const title=`Engagement · ${esc(x.h)}${ul?' · '+esc(ul.platform||ul.label||''):''}`;
+  const nF=(id,lab,val)=>`<div class="field"><label>${lab}</label><input id="${id}" type="number" min="0" value="${num(val)}"></div>`;
+  const cmRows=(eng.customMetrics||[]).map((m,i)=>`
+    <div class="er-row">
+      <input id="cm_n_${i}" value="${esc(m.name)}" placeholder="Metric name" style="flex:1">
+      <input id="cm_v_${i}" type="number" min="0" value="${num(m.value)}" style="max-width:90px">
+      <button class="mini" onclick="removeCM('${bid}','${engid}',${i})">✕</button>
+    </div>`).join('');
+  const body=`<div class="form-grid">
+    ${nF('le_views','Views / 노출뷰 (denominator for ER)',eng.views)}
+    ${nF('le_likes','Likes 좋아요',eng.likes)}
+    ${nF('le_shares','Shares 공유',eng.shares)}
+    ${nF('le_comments','Comments 댓글',eng.comments)}
+    ${nF('le_saves','Saves 저장',eng.saves)}
+    ${nF('le_reposts','Reposts 리포스팅',eng.reposts)}
+    <div class="field full"><label>Screenshot Link (Google Drive)</label>
+      <input id="le_ss" value="${esc(eng.screenshotLink||'')}" placeholder="https://drive.google.com/…"></div>
+    <div class="field full">
+      <label>Custom Metrics <span style="color:var(--muted);font-weight:400">(included in ER)</span></label>
+      <div id="cm_list">${cmRows||'<div style="font-size:12px;color:var(--muted)">None yet</div>'}</div>
+      <button class="mini" style="margin-top:8px" onclick="addCM('${bid}','${engid}')">+ Add metric</button>
+    </div>
+  </div>`;
+  modalShell(title,body,
+    `<button class="btn-ghost" onclick="closeModal()">Cancel</button>
+     <button class="btn-primary" onclick="saveLinkEng('${bid}','${engid}')">Save</button>`);
+}
+function collectLinkEng(bid,engid){
+  const b=DB.bookings.find(x=>x.id===bid);if(!b)return;
+  const eng=(b.engagements||[]).find(e=>e.id===engid);if(!eng)return;
+  const g=id=>{const el=document.getElementById(id);return el?el.value:undefined;};
+  const sv=(k,id)=>{const v=g(id);if(v!==undefined)eng[k]=num(v);};
+  sv('views','le_views');sv('likes','le_likes');sv('shares','le_shares');
+  sv('comments','le_comments');sv('saves','le_saves');sv('reposts','le_reposts');
+  const ss=g('le_ss');if(ss!==undefined)eng.screenshotLink=ss.trim();
+  (eng.customMetrics||[]).forEach((m,i)=>{
+    const n=g(`cm_n_${i}`);if(n!==undefined)m.name=n.trim();
+    const v=g(`cm_v_${i}`);if(v!==undefined)m.value=num(v);
+  });
+  eng.er=calcLinkER(eng);
+}
+async function addCM(bid,engid){
+  collectLinkEng(bid,engid);
+  const b=DB.bookings.find(x=>x.id===bid);if(!b)return;
+  const eng=(b.engagements||[]).find(e=>e.id===engid);if(!eng)return;
+  if(!eng.customMetrics)eng.customMetrics=[];
+  eng.customMetrics.push({name:'',value:0});
+  await saveData();openLinkEngModal(bid,engid);
+}
+async function removeCM(bid,engid,idx){
+  collectLinkEng(bid,engid);
+  const b=DB.bookings.find(x=>x.id===bid);if(!b)return;
+  const eng=(b.engagements||[]).find(e=>e.id===engid);if(!eng)return;
+  if(eng.customMetrics)eng.customMetrics.splice(idx,1);
+  await saveData();openLinkEngModal(bid,engid);
+}
+async function saveLinkEng(bid,engid){
+  collectLinkEng(bid,engid);
+  await saveData();closeModal();render(true);toast(t('saved'));
+}
+async function delLinkEng(bid,engid){
+  if(!confirm('Delete this engagement data?'))return;
+  const b=DB.bookings.find(x=>x.id===bid);if(!b)return;
+  b.engagements=(b.engagements||[]).filter(e=>e.id!==engid);
+  await saveData();render(true);toast(t('saved'));
+}
+
+/* ============================================================
+   REPORT BUILDER
+   ============================================================ */
+function viewReportBuilder(){
+  const rpts=DB.reports||[];
+  return `
+  <div class="sec-head">
+    <div><h2>리포트 만들기</h2><p>캠페인 퍼포먼스 리포트를 생성하고 관리합니다.</p></div>
+    <div class="sec-actions"><button class="btn-primary" onclick="openReportModal()">+ 리포트 추가</button></div>
+  </div>
+  ${rpts.length?rpts.map(reportBuilderCard).join(''):
+    `<div class="empty"><span class="ic">📊</span><div class="t">리포트 없음</div><div>위에서 첫 번째 리포트를 만들어보세요.</div></div>`}`;
+}
+function reportBuilderCard(r){
+  const meta=r.periodType==='influencers'
+    ?`인플루언서 ${(r.selectedInfluencers||[]).length}명 선택`
+    :`${r.dateFrom||'—'} → ${r.dateTo||'—'}`;
+  return `<div class="rpb-card">
+    <span style="font-size:26px">📊</span>
+    <div class="rpb-info">
+      <div class="rpb-name">${esc(r.name||'(무제)')}</div>
+      <div class="rpb-meta">${meta}</div>
+    </div>
+    <button class="mini solid" onclick="openReportPage('${r.id}')">View</button>
+    <button class="mini" onclick="openReportModal('${r.id}')">Edit</button>
+    <button class="mini" onclick="delReport('${r.id}')">Del</button>
+  </div>`;
+}
+function openReportModal(id){
+  const r=id?(DB.reports||[]).find(x=>x.id===id):null;
+  _tmpExtraRPs=r?JSON.parse(JSON.stringify(r.extraReports||[])):[];
+  const uploadedBks=DB.bookings.filter(b=>b.stage==='Upload');
+  const infCbs=uploadedBks.map(b=>{const x=inf(b.infId);if(!x)return '';
+    return `<label style="display:flex;align-items:center;gap:7px;font-size:13px;padding:4px 0;cursor:pointer">
+      <input type="checkbox" id="ri_${x.id}" ${r&&(r.selectedInfluencers||[]).includes(x.id)?'checked':''}> ${esc(x.h)}</label>`;
+  }).join('');
+  const erRows=_tmpExtraRPs.map((er,i)=>`
+    <div class="er-row">
+      <input id="er_n_${i}" value="${esc(er.name||'')}" placeholder="Report name" style="flex:1">
+      <input id="er_l_${i}" value="${esc(er.link||'')}" placeholder="https://drive.google.com/…" style="flex:2">
+      <button class="mini" onclick="removeExtraRP(${i})">✕</button>
+    </div>`).join('');
+  const ptDate=`<input type="radio" name="rp_pt" value="date" ${(!r||r.periodType==='date')?'checked':''}
+    onclick="document.getElementById('rp_ds').style.display='';document.getElementById('rp_is').style.display='none'">`;
+  const ptInf=`<input type="radio" name="rp_pt" value="influencers" ${r&&r.periodType==='influencers'?'checked':''}
+    onclick="document.getElementById('rp_is').style.display='';document.getElementById('rp_ds').style.display='none'">`;
+  const body=`<div class="form-grid">
+    <div class="field full">${fld('rp_name','리포트 이름',r&&r.name,'예: June 2026 Campaign Report')}</div>
+    <div class="field full">
+      <label style="font-size:11px;font-weight:600;color:var(--muted);display:block;margin-bottom:8px">기간 설정</label>
+      <div style="display:flex;gap:16px;margin-bottom:10px">
+        <label style="display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer">${ptDate} 날짜 범위</label>
+        <label style="display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer">${ptInf} 인플루언서 선택</label>
+      </div>
+      <div id="rp_ds" style="${r&&r.periodType==='influencers'?'display:none':''}">
+        <div class="form-grid" style="grid-template-columns:1fr 1fr">
+          ${fld('rp_from','시작일',r&&r.dateFrom,'','date')}
+          ${fld('rp_to','종료일',r&&r.dateTo,'','date')}
+        </div>
+      </div>
+      <div id="rp_is" style="${!r||r.periodType==='date'?'display:none':''}">
+        ${infCbs||'<div style="font-size:12px;color:var(--muted)">업로드 완료된 인플루언서 없음</div>'}
+      </div>
+    </div>
+    <div class="field full"><label>분석 (Analysis)</label>
+      <textarea id="rp_analysis" rows="4" style="width:100%;resize:vertical;border:1px solid var(--line);border-radius:10px;padding:9px 11px;font-family:inherit;font-size:14px">${esc(r&&r.analysis||'')}</textarea></div>
+    <div class="field full"><label>제안 (Suggestion)</label>
+      <textarea id="rp_suggestion" rows="4" style="width:100%;resize:vertical;border:1px solid var(--line);border-radius:10px;padding:9px 11px;font-family:inherit;font-size:14px">${esc(r&&r.suggestion||'')}</textarea></div>
+    <div class="field full">
+      <label style="font-size:11px;font-weight:600;color:var(--muted);display:block;margin-bottom:6px">추가 리포트 (Google Drive)</label>
+      <div id="er_list">${erRows||'<div style="font-size:12px;color:var(--muted)">없음</div>'}</div>
+      <button class="mini" style="margin-top:8px" onclick="addExtraRP()">+ Add link</button>
+    </div>
+  </div>`;
+  modalShell(id?'Edit Report':'New Report',body,
+    `<button class="btn-ghost" onclick="closeModal()">Cancel</button>
+     <button class="btn-primary" onclick="saveReport('${id||''}')">Save</button>`);
+}
+function addExtraRP(){
+  collectExtraRPForm();
+  _tmpExtraRPs.push({name:'',link:''});
+  refreshExtraRPList();
+}
+function removeExtraRP(i){
+  collectExtraRPForm();
+  _tmpExtraRPs.splice(i,1);
+  refreshExtraRPList();
+}
+function collectExtraRPForm(){
+  _tmpExtraRPs.forEach((_,i)=>{
+    const n=document.getElementById(`er_n_${i}`);const l=document.getElementById(`er_l_${i}`);
+    if(n)_tmpExtraRPs[i].name=n.value;if(l)_tmpExtraRPs[i].link=l.value;
+  });
+}
+function refreshExtraRPList(){
+  const el=document.getElementById('er_list');if(!el)return;
+  el.innerHTML=_tmpExtraRPs.length?_tmpExtraRPs.map((er,i)=>`
+    <div class="er-row">
+      <input id="er_n_${i}" value="${esc(er.name||'')}" placeholder="Report name" style="flex:1">
+      <input id="er_l_${i}" value="${esc(er.link||'')}" placeholder="https://drive.google.com/…" style="flex:2">
+      <button class="mini" onclick="removeExtraRP(${i})">✕</button>
+    </div>`).join(''):'<div style="font-size:12px;color:var(--muted)">없음</div>';
+}
+async function saveReport(id){
+  const name=(document.getElementById('rp_name').value||'').trim();
+  if(!name){toast('리포트 이름을 입력해주세요');return;}
+  const ptEl=document.querySelector('[name=rp_pt]:checked');
+  const periodType=ptEl?ptEl.value:'date';
+  const dateFrom=(document.getElementById('rp_from')||{}).value||'';
+  const dateTo=(document.getElementById('rp_to')||{}).value||'';
+  const selectedInfluencers=DB.bookings.filter(b=>b.stage==='Upload').map(b=>inf(b.infId)).filter(Boolean)
+    .filter(x=>{const el=document.getElementById('ri_'+x.id);return el&&el.checked;}).map(x=>x.id);
+  const analysis=(document.getElementById('rp_analysis')||{}).value||'';
+  const suggestion=(document.getElementById('rp_suggestion')||{}).value||'';
+  collectExtraRPForm();
+  const extraReports=_tmpExtraRPs.filter(er=>er.name||er.link);
+  if(!DB.reports)DB.reports=[];
+  if(id){const r=DB.reports.find(x=>x.id===id);if(r)Object.assign(r,{name,periodType,dateFrom,dateTo,selectedInfluencers,analysis,suggestion,extraReports});}
+  else DB.reports.push({id:uid('rp'),name,periodType,dateFrom,dateTo,selectedInfluencers,analysis,suggestion,extraReports});
+  await saveData();closeModal();render();toast(t('saved'));
+  renderGateReports();
+}
+async function delReport(id){
+  if(!confirm('이 리포트를 삭제할까요?'))return;
+  DB.reports=(DB.reports||[]).filter(r=>r.id!==id);
+  await saveData();render();toast(t('saved'));
+  renderGateReports();
+}
+
+/* ============================================================
+   REPORT PAGE VIEW
+   ============================================================ */
+function openReportPage(rpId){
+  if(!DB)return;
+  const rp=(DB.reports||[]).find(r=>r.id===rpId);if(!rp)return;
+  document.getElementById('gate').classList.add('hidden');
+  document.getElementById('app').classList.add('hidden');
+  document.getElementById('reportPage').classList.remove('hidden');
+  document.getElementById('reportPageContent').innerHTML=buildReportView(rp);
+}
+function closeReportPage(){
+  document.getElementById('reportPage').classList.add('hidden');
+  if(state.role){document.getElementById('app').classList.remove('hidden');}
+  else{document.getElementById('gate').classList.remove('hidden');}
+}
+function fmtDate(d){
+  if(!d)return '—';
+  try{const dt=new Date(d+'T00:00:00');return dt.toLocaleDateString('ko-KR',{year:'numeric',month:'short',day:'numeric'});}
+  catch(e){return d;}
+}
+function buildReportView(rp){
+  /* ---- 1. Determine included bookings ---- */
+  let bks=[];
+  if(rp.periodType==='influencers'&&(rp.selectedInfluencers||[]).length){
+    bks=DB.bookings.filter(b=>rp.selectedInfluencers.includes(b.infId));
+  }else if(rp.dateFrom||rp.dateTo){
+    bks=DB.bookings.filter(b=>{
+      const ud=b.uploadDate||(b.stageDates&&b.stageDates.Upload)||'';
+      if(!ud)return false;
+      if(rp.dateFrom&&ud<rp.dateFrom)return false;
+      if(rp.dateTo&&ud>rp.dateTo)return false;
+      return true;
+    });
+  }else{bks=[...DB.bookings];}
+
+  /* ---- 2. Auto-compute clinic visit dates (from visited stage) ---- */
+  const vDates=bks
+    .map(b=>(b.stageDates&&b.stageDates.visited)||b.date||'')
+    .filter(Boolean).sort();
+  const firstVisit=vDates[0]||'';
+  const lastVisit=vDates[vDates.length-1]||'';
+
+  /* ---- 3. Auto-compute upload dates ---- */
+  const uDates=bks
+    .map(b=>b.uploadDate||(b.stageDates&&b.stageDates.Upload)||'')
+    .filter(Boolean).sort();
+  const firstUpload=uDates[0]||'';
+  const lastUpload=uDates[uDates.length-1]||'';
+
+  /* ---- 4. Aggregate engagement stats ---- */
+  let tLikes=0,tShares=0,tComments=0,tSaves=0,tReposts=0,tViews=0,tCustom=0;
+  const bkStats=bks.map(b=>{
+    const engs=b.engagements||[];
+    let bL=0,bS=0,bC=0,bSv=0,bR=0,bV=0,bCu=0;
+    engs.forEach(e=>{
+      bL+=num(e.likes);bS+=num(e.shares);bC+=num(e.comments);
+      bSv+=num(e.saves);bR+=num(e.reposts);bV+=num(e.views);
+      bCu+=(e.customMetrics||[]).reduce((s,m)=>s+num(m.value),0);
+    });
+    tLikes+=bL;tShares+=bS;tComments+=bC;tSaves+=bSv;tReposts+=bR;tViews+=bV;tCustom+=bCu;
+    const actions=bL+bS+bC+bSv+bR+bCu;
+    const er=bV?Math.round(actions/bV*1000)/10:0;
+    const hasEng=bV||bL||bS||bC||bSv||bR;
+    return {b,er,bL,bS,bC,bSv,bR,bV,bCu,hasEng};
+  });
+  const totalActions=tLikes+tShares+tComments+tSaves+tReposts+tCustom;
+  const totalER=tViews?Math.round(totalActions/tViews*1000)/10:0;
+
+  // Sort by ER descending for Top 1 and detail list
+  const sorted=[...bkStats].sort((a,b_)=>b_.er-a.er);
+  const top1=sorted.find(s=>s.hasEng)||sorted[0];
+
+  /* ---- 5. Build HTML ---- */
+  // Hero header
+  let h=`
+  <div class="rp-hero">
+    <div class="rp-campaign-label">📣 babyGLOW Campaign</div>
+    <div class="rp-hero-title">${esc(rp.name)}</div>
+    <div class="rp-period-row">
+      <div class="rp-period-item">
+        <span class="rp-period-lbl">🏥 클리닉 방문 일정</span>
+        <span class="rp-period-val">${fmtDate(firstVisit)}${firstVisit&&lastVisit&&firstVisit!==lastVisit?' → '+fmtDate(lastVisit):(!firstVisit?'—':'')}</span>
+      </div>
+      <div class="rp-period-item">
+        <span class="rp-period-lbl">⬆ 업로드 일정</span>
+        <span class="rp-period-val">${fmtDate(firstUpload)}${firstUpload&&lastUpload&&firstUpload!==lastUpload?' → '+fmtDate(lastUpload):(!firstUpload?'—':'')}</span>
+      </div>
+    </div>
+  </div>`;
+
+  // ER — prominent banner
+  h+=`
+  <div class="rp-er-card">
+    <div class="rp-er-n">${totalER}%</div>
+    <div class="rp-er-info">
+      <div class="rp-er-lbl">Total Engagement Rate</div>
+      <div class="rp-er-sub">ER = (좋아요+공유+댓글+저장+리포스팅+기타) ÷ 노출뷰</div>
+      <div class="rp-er-sub" style="margin-top:4px;opacity:.65">총 ${bks.length}명 · 노출뷰 ${fmtN(tViews)}</div>
+    </div>
+  </div>`;
+
+  // Stats grid
+  h+=`
+  <div class="rp-stat-grid">
+    <div class="rp-stat-card"><div class="rp-stat-n" style="color:var(--coral-deep)">${bks.length}</div><div class="rp-stat-l">총 인플루언서</div></div>
+    <div class="rp-stat-card"><div class="rp-stat-n" style="color:var(--blue)">${fmtN(tViews)}</div><div class="rp-stat-l">노출뷰 Views</div></div>
+    <div class="rp-stat-card"><div class="rp-stat-n">${fmtN(tLikes)}</div><div class="rp-stat-l">좋아요 Likes</div></div>
+    <div class="rp-stat-card"><div class="rp-stat-n">${fmtN(tShares)}</div><div class="rp-stat-l">공유 Shares</div></div>
+    <div class="rp-stat-card"><div class="rp-stat-n">${fmtN(tComments)}</div><div class="rp-stat-l">댓글 Comments</div></div>
+    <div class="rp-stat-card"><div class="rp-stat-n">${fmtN(tSaves)}</div><div class="rp-stat-l">저장 Saves</div></div>
+    <div class="rp-stat-card"><div class="rp-stat-n">${fmtN(tReposts)}</div><div class="rp-stat-l">리포스팅 Reposts</div></div>
+    ${tCustom?`<div class="rp-stat-card"><div class="rp-stat-n">${fmtN(tCustom)}</div><div class="rp-stat-l">기타 Other</div></div>`:''}
+  </div>`;
+
+  // TOP 1
+  if(top1&&top1.hasEng){
+    const x=inf(top1.b.infId)||{h:'?'};
+    const cl=clinicLabel(top1.b.clinicId);
+    h+=`
+    <div class="rp-top1">
+      ${avatar(x,56)}
+      <div style="flex:1">
+        <div class="rp-top1-badge">🏆 TOP 1 ER</div>
+        <div class="rp-top1-handle">${esc(x.h)}</div>
+        ${x.realName?`<div style="font-size:12px;color:var(--muted);margin-top:1px">${esc(x.realName)}</div>`:''}
+        ${cl&&cl!=='—'?`<div style="font-size:11px;color:var(--muted);margin-top:2px">📍 ${esc(cl)}</div>`:''}
+        <div class="rp-top1-er">${top1.er}% ER</div>
+        <div style="display:flex;gap:10px;margin-top:6px;flex-wrap:wrap;font-size:11px;color:var(--muted)">
+          <span>👍 ${fmtN(top1.bL)}</span>
+          <span>🔁 ${fmtN(top1.bS)}</span>
+          <span>💬 ${fmtN(top1.bC)}</span>
+          <span>🔖 ${fmtN(top1.bSv)}</span>
+          <span>📤 ${fmtN(top1.bR)}</span>
+          <span>👁 ${fmtN(top1.bV)}</span>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  // Analysis
+  if(rp.analysis)h+=`
+  <div class="rp-text-panel">
+    <div class="rp-text-lbl">📝 분석 Analysis</div>
+    <div class="rp-text-body">${esc(rp.analysis)}</div>
+  </div>`;
+
+  // Suggestion
+  if(rp.suggestion)h+=`
+  <div class="rp-text-panel">
+    <div class="rp-text-lbl">💡 제안 Suggestion</div>
+    <div class="rp-text-body">${esc(rp.suggestion)}</div>
+  </div>`;
+
+  // Influencer detail cards (ALL bookings, sorted by ER)
+  if(sorted.length){
+    h+=`<div class="rp-section-head">인플루언서 상세 Influencer Details</div>`;
+    sorted.forEach(({b,er,bL,bS,bC,bSv,bR,bV,bCu,hasEng},rank)=>{
+      const x=inf(b.infId)||{h:'?'};
+      const uls=(b.uploadLinks||[]).filter(ul=>ul.url);
+      const engs=b.engagements||[];
+      // Collect all unique screenshot links
+      const screenshots=[...new Set(engs.filter(e=>e.screenshotLink).map(e=>e.screenshotLink))];
+      // Custom metrics (aggregate)
+      const customSummary=[];
+      const cmMap={};
+      engs.forEach(e=>(e.customMetrics||[]).forEach(m=>{
+        if(m.name){cmMap[m.name]=(cmMap[m.name]||0)+num(m.value);}
+      }));
+      Object.entries(cmMap).forEach(([n,v])=>customSummary.push({n,v}));
+
+      h+=`<div class="rp-inf-card">
+        <div class="rp-inf-head">
+          ${avatar(x,42)}
+          <div style="flex:1;min-width:0">
+            <div style="font-weight:700;font-size:15px;display:flex;align-items:center;gap:6px">
+              ${esc(x.h)}
+              ${rank===0&&hasEng?`<span style="font-size:9px;font-weight:700;background:var(--coral);color:#fff;padding:1px 6px;border-radius:4px">TOP 1</span>`:''}
+            </div>
+            ${x.realName?`<div style="font-size:12px;color:var(--muted)">${esc(x.realName)}</div>`:''}
+            <div style="font-size:11px;color:var(--muted);margin-top:1px">📍 ${esc(clinicLabel(b.clinicId))} · ${fmtDate(b.date)||'—'}</div>
+          </div>
+          <div style="text-align:right;flex-shrink:0">
+            ${hasEng?`<div class="rp-inf-er">${er}%</div><div style="font-size:10px;color:var(--muted)">ER</div>`:
+              `<div style="font-size:11px;color:var(--muted);padding:4px 8px;border:1px solid var(--line);border-radius:6px">데이터 없음</div>`}
+          </div>
+        </div>`;
+
+      if(hasEng){
+        h+=`<div class="rp-inf-metrics">
+          <div class="rp-inf-cell"><div class="rp-inf-n" style="color:var(--blue)">${fmtN(bV)}</div><div class="rp-inf-l">👁 Views</div></div>
+          <div class="rp-inf-cell"><div class="rp-inf-n">${fmtN(bL)}</div><div class="rp-inf-l">👍 Likes</div></div>
+          <div class="rp-inf-cell"><div class="rp-inf-n">${fmtN(bS)}</div><div class="rp-inf-l">🔁 Shares</div></div>
+          <div class="rp-inf-cell"><div class="rp-inf-n">${fmtN(bC)}</div><div class="rp-inf-l">💬 Comments</div></div>
+          <div class="rp-inf-cell"><div class="rp-inf-n">${fmtN(bSv)}</div><div class="rp-inf-l">🔖 Saves</div></div>
+          <div class="rp-inf-cell"><div class="rp-inf-n">${fmtN(bR)}</div><div class="rp-inf-l">📤 Reposts</div></div>
+          ${customSummary.map(({n,v})=>`<div class="rp-inf-cell"><div class="rp-inf-n">${fmtN(v)}</div><div class="rp-inf-l">${esc(n)}</div></div>`).join('')}
+        </div>`;
+      }
+
+      // Screenshot links
+      if(screenshots.length){
+        h+=`<div style="margin:8px 0 4px;display:flex;flex-wrap:wrap;gap:5px">
+          ${screenshots.map(link=>`<a href="${esc(link)}" target="_blank" rel="noopener" class="rp-link-row">📸 인게이지먼트 스크린샷 ↗</a>`).join('')}
+        </div>`;
+      }
+
+      // Upload links (clickable)
+      if(uls.length){
+        h+=`<div style="margin-top:6px;display:flex;flex-wrap:wrap;gap:5px">
+          ${uls.map(ul=>`<a href="${esc(ul.url)}" target="_blank" rel="noopener" class="rp-link-row">
+            <span style="font-size:10px;font-weight:700;background:var(--soft);color:var(--coral-deep);padding:1px 6px;border-radius:4px;flex-shrink:0">${esc(ul.platform==='ig'?'Instagram':ul.platform==='tt'?'TikTok':ul.platform==='youtube'?'YouTube':(ul.label||ul.platform||'Link'))}</span>
+            <span style="font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:200px">${esc(ul.url)}</span>
+            ↗
+          </a>`).join('')}
+        </div>`;
+      }
+
+      h+=`</div>`;
+    });
+  }
+
+  // Extra reports (Google Drive links)
+  const extras=(rp.extraReports||[]).filter(er=>er.link||er.name);
+  if(extras.length){
+    h+=`
+    <div class="rp-text-panel" style="margin-top:8px">
+      <div class="rp-text-lbl">📁 추가 리포트 Additional Reports</div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+        ${extras.map(er=>`<a href="${esc(er.link||'#')}" target="_blank" rel="noopener" class="rp-link-row" style="font-size:13px;padding:10px 14px">
+          <span style="font-size:16px">📄</span>
+          <span style="font-weight:700;color:var(--ink)">${esc(er.name||'Report')}</span>
+          <span style="margin-left:auto;color:var(--muted)">Google Drive ↗</span>
+        </a>`).join('')}
+      </div>
+    </div>`;
+  }
+
+  return h;
+}
+
+/* ============================================================
+   GATE REPORTS
+   ============================================================ */
+function renderGateReports(){
+  const rpts=DB?(DB.reports||[]):[];
+  const sec=document.getElementById('gateRpSection');
+  const items=document.getElementById('gateRpItems');
+  if(!sec||!items)return;
+  if(!rpts.length){sec.classList.add('hidden');return;}
+  items.innerHTML=rpts.map(r=>`
+    <button class="gate-rp-btn" onclick="openReportPage('${r.id}')">
+      <span style="font-size:18px">📊</span>
+      <span>
+        <span class="gate-rp-name">${esc(r.name||'(무제)')}</span>
+        <span class="gate-rp-meta">${r.periodType==='influencers'?`인플루언서 ${(r.selectedInfluencers||[]).length}명`:`${r.dateFrom||'—'} → ${r.dateTo||'—'}`}</span>
+      </span>
+      <span style="color:var(--muted);font-size:18px;margin-left:auto">›</span>
+    </button>`).join('');
+  sec.classList.remove('hidden');
+}
+(async function initGate(){
+  try{
+    const d=await Store.getMain();
+    if(d){if(!DB){DB=d;migrate();}renderGateReports();}
+  }catch(e){}
+})();
 </script>
 </body>
 </html>

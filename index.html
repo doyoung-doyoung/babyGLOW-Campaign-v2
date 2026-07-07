@@ -2156,7 +2156,7 @@ function buildReportView(rp){
     });
     tLikes+=bL;tShares+=bS;tComments+=bC;tSaves+=bSv;tReposts+=bR;tViews+=bV;tCustom+=bCu;
     const actions=bL+bS+bC+bSv+bR;
-    // ER = (Likes + Shares + Comments + Saves + Reposts) ÷ Views · higher % = more efficient
+    // ER = (Likes + Shares + Comments + Saves + Reposts) ÷ Views 
     const er=(bV&&actions)?Math.round(actions/bV*1000)/10:0;
     const hasEng=bV||bL||bS||bC||bSv||bR;
     return {b,er,bL,bS,bC,bSv,bR,bV,bCu,hasEng};

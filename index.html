@@ -660,14 +660,12 @@ function EMPTY_REPORT(){
   return {id:uid('rp'),name:'',periodType:'date',dateFrom:'',dateTo:'',
     selectedInfluencers:[],analysis:'',suggestion:'',extraReports:[]};
 }
-/* ER = 노출뷰 ÷ (좋아요+공유+댓글+저장+리포스팅+커스텀 항목)
-   값이 낮을수록 적은 노출로 많은 인게이지먼트를 얻었다는 의미 (효율 ↑) */
+/* ER = (Likes + Shares + Comments + Saves + Reposts) ÷ Views × 100 — same formula used app-wide */
 function calcLinkER(e){
   if(!e||!num(e.views))return 0;
-  const actions=num(e.likes)+num(e.shares)+num(e.comments)+num(e.saves)+num(e.reposts)+
-    (e.customMetrics||[]).reduce((s,m)=>s+num(m.value),0);
+  const actions=num(e.likes)+num(e.shares)+num(e.comments)+num(e.saves)+num(e.reposts);
   if(!actions)return 0;
-  return Math.round(num(e.views)/actions*10)/10;
+  return Math.round(actions/num(e.views)*1000)/10;
 }
 let _tmpExtraRPs=[];
 
@@ -873,7 +871,7 @@ function migrate(){
 function num(v){const n=Number(v);return isNaN(n)?0:n;}
 function fmtN(n){return (Number(n)||0).toLocaleString('en-US');}
 function engTotal(e){return num(e.likes)+num(e.comments)+num(e.saves)+num(e.shares);}
-function calcER(e){const r=num(e.reach);if(!r)return 0;return Math.round(engTotal(e)/r*1000)/10;}
+function calcER(e){const v=num(e.views);if(!v)return 0;return Math.round(engTotal(e)/v*1000)/10;}
 function engHasData(e){return e&&(num(e.views)||num(e.reach)||num(e.likes)||num(e.comments)||num(e.saves)||num(e.shares)||num(e.follows)||(e.captures&&e.captures.length));}
 /* extract a Google Drive FILEID from a share link, then build an embeddable thumbnail URL */
 function driveId(link){if(!link)return '';const m=link.match(/\/d\/([A-Za-z0-9_-]{12,})/)||link.match(/[?&]id=([A-Za-z0-9_-]{12,})/);return m?m[1]:'';}
@@ -1852,7 +1850,7 @@ function linkEngBlock(b,ul,eng,editable){
     <div class="leng-head">
       ${ul?`<span class="leng-plat">${esc(ul.platform||ul.label||'')}</span>`:''}
       <span class="leng-lbl">${esc(label)}</span>
-      ${hasData?`<span class="leng-er">ER ${er}</span>`:''}
+      ${hasData?`<span class="leng-er">ER ${er}%</span>`:''}
       ${editable?`
         <button class="mini" onclick="openLinkEngModal('${b.id}','${eng.id}')">Edit</button>
         <button class="mini" onclick="delLinkEng('${b.id}','${eng.id}')">Del</button>`:''}
@@ -1892,7 +1890,7 @@ function openLinkEngModal(bid,engid){
     <div class="field full"><label>Screenshot Link (Google Drive)</label>
       <input id="le_ss" value="${esc(eng.screenshotLink||'')}" placeholder="https://drive.google.com/…"></div>
     <div class="field full">
-      <label>Custom Metrics <span style="color:var(--muted);font-weight:400">(included in ER)</span></label>
+      <label>Custom Metrics <span style="color:var(--muted);font-weight:400">(reference only — not included in ER)</span></label>
       <div id="cm_list">${cmRows||'<div style="font-size:12px;color:var(--muted)">None yet</div>'}</div>
       <button class="mini" style="margin-top:8px" onclick="addCM('${bid}','${engid}')">+ Add metric</button>
     </div>

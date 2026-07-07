@@ -2323,18 +2323,26 @@ function buildReportView(rp){
     });
   }
 
-  // Extra reports (Google Drive links)
+  // Extra reports (Google Drive links) — auto-embed preview for Drive files
   const extras=(rp.extraReports||[]).filter(er=>er.link||er.name);
   if(extras.length&&rp.showExtraReports!==false){
     h+=`
     <div class="rp-text-panel" style="margin-top:8px">
       <div class="rp-text-lbl">📁 Detailed Report</div>
-      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
-        ${extras.map(er=>`<a href="${esc(er.link||'#')}" target="_blank" rel="noopener" class="rp-link-row" style="font-size:13px;padding:10px 14px">
-          <span style="font-size:16px">📄</span>
-          <span style="font-weight:700;color:var(--ink)">${esc(er.name||'Report')}</span>
-          <span style="margin-left:auto;color:var(--muted)">Google Drive ↗</span>
-        </a>`).join('')}
+      <div style="display:flex;flex-direction:column;gap:14px;margin-top:8px">
+        ${extras.map(er=>{
+          const link=er.link||'';
+          const fm=link.match(/\/file\/d\/([^/]+)/);
+          const preview=fm?`https://drive.google.com/file/d/${fm[1]}/preview`:'';
+          return `<div>
+            <a href="${esc(link||'#')}" target="_blank" rel="noopener" class="rp-link-row" style="font-size:13px;padding:10px 14px">
+              <span style="font-size:16px">📄</span>
+              <span style="font-weight:700;color:var(--ink)">${esc(er.name||'Report')}</span>
+              <span style="margin-left:auto;color:var(--muted)">${preview?'Open in Google Drive ↗':'Open ↗'}</span>
+            </a>
+            ${preview?`<div class="vidwrap" style="margin-top:8px;height:600px"><iframe class="vidframe" style="height:600px" src="${esc(preview)}" allow="autoplay" allowfullscreen></iframe></div>`:''}
+          </div>`;
+        }).join('')}
       </div>
     </div>`;
   }

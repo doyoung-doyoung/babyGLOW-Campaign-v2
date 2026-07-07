@@ -2157,10 +2157,8 @@ function buildReportView(rp){
     tLikes+=bL;tShares+=bS;tComments+=bC;tSaves+=bSv;tReposts+=bR;tViews+=bV;tCustom+=bCu;
     const actions=bL+bS+bC+bSv+bR;
     // ER = (Likes + Shares + Comments + Saves + Reposts) ÷ Views · higher % = more efficient
-    let erRaw=(bV&&actions)?(actions/bV*100):0;
-    // 인스타그램·틱톡 두 플랫폼 모두 데이터가 입력된 경우, 최종 ER을 2로 나눔 (반올림 전에 나눔)
-    const platformsWithData=engs.filter(e=>num(e.likes)||num(e.shares)||num(e.comments)||num(e.saves)||num(e.reposts)||num(e.views)).length;
-    if(platformsWithData>=2)erRaw=erRaw/2;
+    // 인스타그램·틱톡 등 여러 플랫폼의 참여(좋아요+공유+댓글+저장+리포스트)와 조회수를 합산한 값으로 계산 (2로 나누지 않음)
+    const erRaw=(bV&&actions)?(actions/bV*100):0;
     const er=Math.round(erRaw*100)/100;
     const hasEng=bV||bL||bS||bC||bSv||bR;
     return {b,er,bL,bS,bC,bSv,bR,bV,bCu,hasEng};
@@ -2207,7 +2205,7 @@ function buildReportView(rp){
     <div class="rp-er-n">${totalER}%</div>
     <div class="rp-er-info">
       <div class="rp-er-lbl">Total Engagement Rate</div>
-      <div class="rp-er-sub">ER = (Likes + Shares + Comments + Saves + Reposts) ÷ Views </div>
+      <div class="rp-er-sub">ER = (Likes + Shares + Comments + Saves + Reposts) ÷ Views · Higher % = more efficient</div>
       <div class="rp-er-sub" style="margin-top:4px;opacity:.65">Total ${bks.length} influencers · Views ${fmtN(tViews)}</div>
     </div>
   </div>`;

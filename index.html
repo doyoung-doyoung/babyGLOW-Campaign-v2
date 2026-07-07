@@ -665,7 +665,7 @@ function calcLinkER(e){
   if(!e||!num(e.views))return 0;
   const actions=num(e.likes)+num(e.shares)+num(e.comments)+num(e.saves)+num(e.reposts);
   if(!actions)return 0;
-  return Math.round(actions/num(e.views)*1000)/10;
+  return Math.round(actions/num(e.views)*10000)/100;
 }
 let _tmpExtraRPs=[];
 
@@ -871,7 +871,7 @@ function migrate(){
 function num(v){const n=Number(v);return isNaN(n)?0:n;}
 function fmtN(n){return (Number(n)||0).toLocaleString('en-US');}
 function engTotal(e){return num(e.likes)+num(e.comments)+num(e.saves)+num(e.shares);}
-function calcER(e){const v=num(e.views);if(!v)return 0;return Math.round(engTotal(e)/v*1000)/10;}
+function calcER(e){const v=num(e.views);if(!v)return 0;return Math.round(engTotal(e)/v*10000)/100;}
 function engHasData(e){return e&&(num(e.views)||num(e.reach)||num(e.likes)||num(e.comments)||num(e.saves)||num(e.shares)||num(e.follows)||(e.captures&&e.captures.length));}
 /* extract a Google Drive FILEID from a share link, then build an embeddable thumbnail URL */
 function driveId(link){if(!link)return '';const m=link.match(/\/d\/([A-Za-z0-9_-]{12,})/)||link.match(/[?&]id=([A-Za-z0-9_-]{12,})/);return m?m[1]:'';}
@@ -2157,15 +2157,16 @@ function buildReportView(rp){
     tLikes+=bL;tShares+=bS;tComments+=bC;tSaves+=bSv;tReposts+=bR;tViews+=bV;tCustom+=bCu;
     const actions=bL+bS+bC+bSv+bR;
     // ER = (Likes + Shares + Comments + Saves + Reposts) ÷ Views · higher % = more efficient
-    let er=(bV&&actions)?Math.round(actions/bV*1000)/10:0;
-    // 인스타그램·틱톡 두 플랫폼 모두 데이터가 입력된 경우, 최종 ER을 2로 나눔
+    let erRaw=(bV&&actions)?(actions/bV*100):0;
+    // 인스타그램·틱톡 두 플랫폼 모두 데이터가 입력된 경우, 최종 ER을 2로 나눔 (반올림 전에 나눔)
     const platformsWithData=engs.filter(e=>num(e.likes)||num(e.shares)||num(e.comments)||num(e.saves)||num(e.reposts)||num(e.views)).length;
-    if(platformsWithData>=2)er=Math.round(er/2*10)/10;
+    if(platformsWithData>=2)erRaw=erRaw/2;
+    const er=Math.round(erRaw*100)/100;
     const hasEng=bV||bL||bS||bC||bSv||bR;
     return {b,er,bL,bS,bC,bSv,bR,bV,bCu,hasEng};
   });
-  const totalActions=tLikes+tShares+tComments+tSaves+tReposts;
-  const totalER=(tViews&&totalActions)?Math.round(totalActions/tViews*1000)/10:0;
+  const engagedStats=bkStats.filter(s=>s.hasEng);
+  const totalER=engagedStats.length?Math.round(engagedStats.reduce((s,x)=>s+x.er,0)/engagedStats.length*100)/100:0;
 
   // ER 값이 높을수록 효율이 좋음 → 내림차순 정렬, 데이터 없는 항목은 뒤로
   const sorted=[...bkStats].sort((a,b_)=>{

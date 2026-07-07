@@ -2157,20 +2157,20 @@ function buildReportView(rp){
       bCu+=(e.customMetrics||[]).reduce((s,m)=>s+num(m.value),0);
     });
     tLikes+=bL;tShares+=bS;tComments+=bC;tSaves+=bSv;tReposts+=bR;tViews+=bV;tCustom+=bCu;
-    const actions=bL+bS+bC+bSv+bR+bCu;
-    // ER = 노출뷰 ÷ 인게이지먼트 합 (낮을수록 효율 ↑)
-    const er=(bV&&actions)?Math.round(bV/actions*10)/10:0;
+    const actions=bL+bS+bC+bSv+bR;
+    // ER = (Likes + Shares + Comments + Saves + Reposts) ÷ Views · higher % = more efficient
+    const er=(bV&&actions)?Math.round(actions/bV*1000)/10:0;
     const hasEng=bV||bL||bS||bC||bSv||bR;
     return {b,er,bL,bS,bC,bSv,bR,bV,bCu,hasEng};
   });
-  const totalActions=tLikes+tShares+tComments+tSaves+tReposts+tCustom;
-  const totalER=(tViews&&totalActions)?Math.round(tViews/totalActions*10)/10:0;
+  const totalActions=tLikes+tShares+tComments+tSaves+tReposts;
+  const totalER=(tViews&&totalActions)?Math.round(totalActions/tViews*1000)/10:0;
 
-  // 새 공식에서는 ER 값이 낮을수록 효율이 좋음 → 오름차순 정렬, 데이터 없는 항목은 뒤로
+  // ER 값이 높을수록 효율이 좋음 → 내림차순 정렬, 데이터 없는 항목은 뒤로
   const sorted=[...bkStats].sort((a,b_)=>{
-    const av=(a.hasEng&&a.er>0)?a.er:Infinity;
-    const bv=(b_.hasEng&&b_.er>0)?b_.er:Infinity;
-    return av-bv;
+    const av=(a.hasEng&&a.er>0)?a.er:-Infinity;
+    const bv=(b_.hasEng&&b_.er>0)?b_.er:-Infinity;
+    return bv-av;
   });
   const top1=sorted.find(s=>s.hasEng&&s.er>0)||sorted.find(s=>s.hasEng)||sorted[0];
 
@@ -2195,10 +2195,10 @@ function buildReportView(rp){
   // ER — prominent banner
   h+=`
   <div class="rp-er-card">
-    <div class="rp-er-n">${totalER}</div>
+    <div class="rp-er-n">${totalER}%</div>
     <div class="rp-er-info">
       <div class="rp-er-lbl">Total Engagement Rate</div>
-      <div class="rp-er-sub">ER = Views ÷ (Likes + Shares + Comments + Saves + Reposts + Other) </div>
+      <div class="rp-er-sub">ER = (Likes + Shares + Comments + Saves + Reposts) ÷ Views · Higher % = more efficient</div>
       <div class="rp-er-sub" style="margin-top:4px;opacity:.65">Total ${bks.length} influencers · Views ${fmtN(tViews)}</div>
     </div>
   </div>`;
@@ -2228,7 +2228,7 @@ function buildReportView(rp){
         <div class="rp-top1-handle">${handleLink(x)}</div>
         ${x.realName?`<div style="font-size:12px;color:var(--muted);margin-top:1px">${esc(x.realName)}</div>`:''}
         ${cl&&cl!=='—'?`<div style="font-size:11px;color:var(--muted);margin-top:2px">📍 ${esc(cl)}</div>`:''}
-        <div class="rp-top1-er">ER ${top1.er}</div>
+        <div class="rp-top1-er">ER ${top1.er}%</div>
         <div style="display:flex;gap:10px;margin-top:6px;flex-wrap:wrap;font-size:11px;color:var(--muted)">
           <span>👍 ${fmtN(top1.bL)}</span>
           <span>🔁 ${fmtN(top1.bS)}</span>
@@ -2284,7 +2284,7 @@ function buildReportView(rp){
             <div style="font-size:11px;color:var(--muted);margin-top:1px">📍 ${esc(clinicLabel(b.clinicId))} · ${fmtDate(b.date)||'—'}</div>
           </div>
           <div style="text-align:right;flex-shrink:0">
-            ${hasEng?`<div class="rp-inf-er">${er}</div><div style="font-size:10px;color:var(--muted)">ER</div>`:
+            ${hasEng?`<div class="rp-inf-er">${er}%</div><div style="font-size:10px;color:var(--muted)">ER</div>`:
               `<div style="font-size:11px;color:var(--muted);padding:4px 8px;border:1px solid var(--line);border-radius:6px">No data</div>`}
           </div>
         </div>`;

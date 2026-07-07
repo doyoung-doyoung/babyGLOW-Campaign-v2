@@ -2023,7 +2023,7 @@ function openReportModal(id){
       <textarea id="rp_suggestion" rows="4" style="width:100%;resize:vertical;border:1px solid var(--line);border-radius:10px;padding:9px 11px;font-family:inherit;font-size:14px">${esc(r&&r.suggestion||'')}</textarea></div>
     <div class="field full">
       <label style="font-size:11px;font-weight:600;color:var(--muted);display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-        <span>추가 리포트 (Google Drive)</span>
+        <span>Detailed Report (Google Drive)</span>
         <span style="display:flex;align-items:center;gap:5px;font-weight:500;font-size:12px;color:var(--ink);cursor:pointer;text-transform:none;letter-spacing:normal">
           <input type="checkbox" id="rp_showExtraReports" ${!r||r.showExtraReports!==false?'checked':''}> 리포트에 표시
         </span>
@@ -2182,11 +2182,11 @@ function buildReportView(rp){
     <div class="rp-hero-title">${esc(rp.name)}</div>
     <div class="rp-period-row">
       <div class="rp-period-item">
-        <span class="rp-period-lbl">🏥 클리닉 방문 일정</span>
+        <span class="rp-period-lbl">🏥 Clinic Visit Schedule</span>
         <span class="rp-period-val">${fmtDate(firstVisit)}${firstVisit&&lastVisit&&firstVisit!==lastVisit?' → '+fmtDate(lastVisit):(!firstVisit?'—':'')}</span>
       </div>
       <div class="rp-period-item">
-        <span class="rp-period-lbl">⬆ 업로드 일정</span>
+        <span class="rp-period-lbl">⬆ Upload Schedule</span>
         <span class="rp-period-val">${fmtDate(firstUpload)}${firstUpload&&lastUpload&&firstUpload!==lastUpload?' → '+fmtDate(lastUpload):(!firstUpload?'—':'')}</span>
       </div>
     </div>
@@ -2198,22 +2198,22 @@ function buildReportView(rp){
     <div class="rp-er-n">${totalER}</div>
     <div class="rp-er-info">
       <div class="rp-er-lbl">Total Engagement Rate</div>
-      <div class="rp-er-sub">ER = 노출뷰 ÷ (좋아요+공유+댓글+저장+리포스팅+기타) · 낮을수록 효율 ↑</div>
-      <div class="rp-er-sub" style="margin-top:4px;opacity:.65">총 ${bks.length}명 · 노출뷰 ${fmtN(tViews)}</div>
+      <div class="rp-er-sub">ER = Views ÷ (Likes + Shares + Comments + Saves + Reposts + Other) · Lower is more efficient</div>
+      <div class="rp-er-sub" style="margin-top:4px;opacity:.65">Total ${bks.length} influencers · Views ${fmtN(tViews)}</div>
     </div>
   </div>`;
 
   // Stats grid
   h+=`
   <div class="rp-stat-grid">
-    <div class="rp-stat-card"><div class="rp-stat-n" style="color:var(--coral-deep)">${bks.length}</div><div class="rp-stat-l">총 인플루언서</div></div>
-    <div class="rp-stat-card"><div class="rp-stat-n" style="color:var(--blue)">${fmtN(tViews)}</div><div class="rp-stat-l">노출뷰 Views</div></div>
-    <div class="rp-stat-card"><div class="rp-stat-n">${fmtN(tLikes)}</div><div class="rp-stat-l">좋아요 Likes</div></div>
-    <div class="rp-stat-card"><div class="rp-stat-n">${fmtN(tShares)}</div><div class="rp-stat-l">공유 Shares</div></div>
-    <div class="rp-stat-card"><div class="rp-stat-n">${fmtN(tComments)}</div><div class="rp-stat-l">댓글 Comments</div></div>
-    <div class="rp-stat-card"><div class="rp-stat-n">${fmtN(tSaves)}</div><div class="rp-stat-l">저장 Saves</div></div>
-    <div class="rp-stat-card"><div class="rp-stat-n">${fmtN(tReposts)}</div><div class="rp-stat-l">리포스팅 Reposts</div></div>
-    ${tCustom?`<div class="rp-stat-card"><div class="rp-stat-n">${fmtN(tCustom)}</div><div class="rp-stat-l">기타 Other</div></div>`:''}
+    <div class="rp-stat-card"><div class="rp-stat-n" style="color:var(--coral-deep)">${bks.length}</div><div class="rp-stat-l">Total Influencers</div></div>
+    <div class="rp-stat-card"><div class="rp-stat-n" style="color:var(--blue)">${fmtN(tViews)}</div><div class="rp-stat-l">Views</div></div>
+    <div class="rp-stat-card"><div class="rp-stat-n">${fmtN(tLikes)}</div><div class="rp-stat-l">Likes</div></div>
+    <div class="rp-stat-card"><div class="rp-stat-n">${fmtN(tShares)}</div><div class="rp-stat-l">Shares</div></div>
+    <div class="rp-stat-card"><div class="rp-stat-n">${fmtN(tComments)}</div><div class="rp-stat-l">Comments</div></div>
+    <div class="rp-stat-card"><div class="rp-stat-n">${fmtN(tSaves)}</div><div class="rp-stat-l">Saves</div></div>
+    <div class="rp-stat-card"><div class="rp-stat-n">${fmtN(tReposts)}</div><div class="rp-stat-l">Reposts</div></div>
+    ${tCustom?`<div class="rp-stat-card"><div class="rp-stat-n">${fmtN(tCustom)}</div><div class="rp-stat-l">Other</div></div>`:''}
   </div>`;
 
   // TOP 1
@@ -2244,20 +2244,20 @@ function buildReportView(rp){
   // Analysis
   if(rp.analysis&&rp.showAnalysis!==false)h+=`
   <div class="rp-text-panel">
-    <div class="rp-text-lbl">📝 분석 Analysis</div>
+    <div class="rp-text-lbl">📝 Analysis</div>
     <div class="rp-text-body">${esc(rp.analysis)}</div>
   </div>`;
 
   // Suggestion
   if(rp.suggestion&&rp.showSuggestion!==false)h+=`
   <div class="rp-text-panel">
-    <div class="rp-text-lbl">💡 제안 Suggestion</div>
+    <div class="rp-text-lbl">💡 Suggestion</div>
     <div class="rp-text-body">${esc(rp.suggestion)}</div>
   </div>`;
 
   // Influencer detail cards (ALL bookings, sorted by ER)
   if(sorted.length&&rp.showInfDetail!==false){
-    h+=`<div class="rp-section-head">인플루언서 상세 Influencer Details</div>`;
+    h+=`<div class="rp-section-head">Influencer Details</div>`;
     sorted.forEach(({b,er,bL,bS,bC,bSv,bR,bV,bCu,hasEng},rank)=>{
       const x=inf(b.infId)||{h:'?'};
       const uls=(b.uploadLinks||[]).filter(ul=>ul.url);
@@ -2285,7 +2285,7 @@ function buildReportView(rp){
           </div>
           <div style="text-align:right;flex-shrink:0">
             ${hasEng?`<div class="rp-inf-er">${er}</div><div style="font-size:10px;color:var(--muted)">ER</div>`:
-              `<div style="font-size:11px;color:var(--muted);padding:4px 8px;border:1px solid var(--line);border-radius:6px">데이터 없음</div>`}
+              `<div style="font-size:11px;color:var(--muted);padding:4px 8px;border:1px solid var(--line);border-radius:6px">No data</div>`}
           </div>
         </div>`;
 
@@ -2304,7 +2304,7 @@ function buildReportView(rp){
       // Screenshot links
       if(screenshots.length){
         h+=`<div style="margin:8px 0 4px;display:flex;flex-wrap:wrap;gap:5px">
-          ${screenshots.map(link=>`<a href="${esc(link)}" target="_blank" rel="noopener" class="rp-link-row">📸 인게이지먼트 스크린샷 ↗</a>`).join('')}
+          ${screenshots.map(link=>`<a href="${esc(link)}" target="_blank" rel="noopener" class="rp-link-row">📸 Engagement Screenshot ↗</a>`).join('')}
         </div>`;
       }
 
@@ -2328,7 +2328,7 @@ function buildReportView(rp){
   if(extras.length&&rp.showExtraReports!==false){
     h+=`
     <div class="rp-text-panel" style="margin-top:8px">
-      <div class="rp-text-lbl">📁 추가 리포트 Additional Reports</div>
+      <div class="rp-text-lbl">📁 Detailed Report</div>
       <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
         ${extras.map(er=>`<a href="${esc(er.link||'#')}" target="_blank" rel="noopener" class="rp-link-row" style="font-size:13px;padding:10px 14px">
           <span style="font-size:16px">📄</span>

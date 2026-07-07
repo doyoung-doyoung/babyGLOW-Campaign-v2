@@ -2165,8 +2165,15 @@ function buildReportView(rp){
     const hasEng=bV||bL||bS||bC||bSv||bR;
     return {b,er,bL,bS,bC,bSv,bR,bV,bCu,hasEng};
   });
-  const engagedStats=bkStats.filter(s=>s.hasEng);
-  const totalER=engagedStats.length?Math.round(engagedStats.reduce((s,x)=>s+x.er,0)/engagedStats.length*100)/100:0;
+  // Total ER = 인플루언서(사람) 수가 아니라, 데이터가 입력된 계정(인스타/틱톡 개별 인게이지먼트) 수로 평균
+  let acctERSum=0,acctCount=0;
+  bkStats.forEach(s=>{
+    (s.b.engagements||[]).forEach(e=>{
+      const v=num(e.views),a=num(e.likes)+num(e.shares)+num(e.comments)+num(e.saves)+num(e.reposts);
+      if(v&&a){acctERSum+=(a/v*100);acctCount++;}
+    });
+  });
+  const totalER=acctCount?Math.round(acctERSum/acctCount*100)/100:0;
 
   // ER 값이 높을수록 효율이 좋음 → 내림차순 정렬, 데이터 없는 항목은 뒤로
   const sorted=[...bkStats].sort((a,b_)=>{
@@ -2200,7 +2207,7 @@ function buildReportView(rp){
     <div class="rp-er-n">${totalER}%</div>
     <div class="rp-er-info">
       <div class="rp-er-lbl">Total Engagement Rate</div>
-      <div class="rp-er-sub">ER = (Likes + Shares + Comments + Saves + Reposts) ÷ Views </div>
+      <div class="rp-er-sub">ER = (Likes + Shares + Comments + Saves + Reposts) ÷ Views · Higher % = more efficient</div>
       <div class="rp-er-sub" style="margin-top:4px;opacity:.65">Total ${bks.length} influencers · Views ${fmtN(tViews)}</div>
     </div>
   </div>`;
